@@ -11,6 +11,8 @@
     "dev": "npx react-native start"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^12.1.0",
+    "@react-native-firebase/auth": "^12.1.0",
     "@types/react-router-native": "^5.1.0",
     "native-base": "^3.0.2",
     "react": "17.0.1",

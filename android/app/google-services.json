@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "94998372623",
+    "project_id": "appevidencias-3abad",
+    "storage_bucket": "appevidencias-3abad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94998372623:android:774f67aa0b4be583e39e7a",
+        "android_client_info": {
+          "package_name": "com.appevidencias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94998372623-8r5q4e8lte5cpol3g37rcn9srbl3k075.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB4S_xP-2lX9QYVHkpPPMUJtZpB7NiX_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94998372623-8r5q4e8lte5cpol3g37rcn9srbl3k075.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
