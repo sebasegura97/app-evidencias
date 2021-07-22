@@ -29,7 +29,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress}) => {
   };
 
   return (
-    <Pressable onPress={startAnimation}>
+    <Pressable onPress={onPress}>
       <Box position="relative">
         <Animated.View style={{transform: [{rotate: spin}]}}>
           <Circle

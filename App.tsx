@@ -10,7 +10,7 @@ const App = () => {
     console.log('user', user);
   }, [user]);
 
-  if (user) {
+  if (!user) {
     return <PrivatePages />;
   } else {
     return <PublicPages />;
