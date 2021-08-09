@@ -1,13 +1,21 @@
 import React from 'react';
 import {Animated, Easing, GestureResponderEvent} from 'react-native';
-import {Pressable, Center, Circle, Text, Box} from 'native-base';
+import {Pressable, Center, Circle, Text, Box, Button} from 'native-base';
+import {IButtonProps} from 'native-base';
 import colors from '../../Constants/colors';
+import {useEffect} from 'react';
 
 interface PrimaryButtonProps {
-  onPress: (event: GestureResponderEvent) => void;
+  buttonProps: IButtonProps;
+  loading?: boolean;
+  label: string;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress}) => {
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+  buttonProps,
+  loading,
+  label,
+}) => {
   // First set up animation
   const spinValue = new Animated.Value(0);
 
@@ -17,23 +25,38 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress}) => {
     outputRange: ['0deg', '360deg'],
   });
 
+  const animation = Animated.loop(
+    Animated.timing(spinValue, {
+      toValue: 1,
+      duration: 1000,
+      easing: Easing.linear, // Easing is an additional import from react-native
+      useNativeDriver: true, // To make use of native driver for performance
+    }),
+  );
+
   const startAnimation = () => {
-    Animated.loop(
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear, // Easing is an additional import from react-native
-        useNativeDriver: true, // To make use of native driver for performance
-      }),
-    ).start();
+    animation.start();
   };
 
+  const stopAnimation = () => {
+    animation.stop();
+  };
+
+  useEffect(() => {
+    if (loading) {
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
+
   return (
-    <Pressable onPress={startAnimation}>
-      <Box position="relative">
+    <Button {...buttonProps} style={{backgroundColor: 'transparent'}}>
+      <Box position="relative" alignItems="center">
         <Animated.View style={{transform: [{rotate: spin}]}}>
           <Circle
-            style={{width: 102, height: 102}}
+            style={{width: 78, height: 78}}
             bg={{
               linearGradient: {
                 colors: [colors.secondaryLight, colors.primaryMain],
@@ -44,17 +67,19 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress}) => {
           />
         </Animated.View>
         <Center position="absolute" inset="0">
-          <Circle style={{width: 96, height: 96}} bg={colors.bgPrimaryDark}>
+          <Circle
+            style={{width: 72, height: 72}}
+            padding={2}
+            bg={colors.bgPrimaryDark}>
             <Center>
-              <Text textAlign="center" fontSize="xs">
-                {' '}
-                Botón Mágico{' '}
+              <Text textAlign="center" fontSize="xs" lineHeight={16}>
+                {label}
               </Text>
             </Center>
           </Circle>
         </Center>
       </Box>
-    </Pressable>
+    </Button>
   );
 };
 
