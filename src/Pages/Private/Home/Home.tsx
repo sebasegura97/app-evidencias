@@ -20,7 +20,7 @@ const Home = () => {
           source={require('./assets/home.png')}
         />
       </Box>
-      <PrimaryButton onPress={()=>{history.push("/stepOne")}} />
+      <PrimaryButton onPress={()=>{history.push("/stepsInfo")}} />
 
       
     </Stack>

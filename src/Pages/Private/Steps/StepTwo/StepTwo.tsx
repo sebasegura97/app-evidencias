@@ -1,38 +1,59 @@
 import React from 'react';
 import {Text, Box, Heading, Image, Stack, Button} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
-import * as ImagePicker from 'react-native-image-picker';
 import { useHistory } from 'react-router-native';
+import DocumentPicker from 'react-native-document-picker'
+import { Alert } from 'react-native';
+import { useEffect } from 'react';
 
 
-interface Action {
-  title: string;
-  type:'library';
-  options: ImagePicker.ImageLibraryOptions;
-}
-
-const action: Action = 
-  {
-    title: 'Selecciona imagenes',
-    type: 'library',
-    options: {
-      maxHeight: 200,
-      maxWidth: 200,
-      selectionLimit: 0,
-      mediaType: 'photo',
-      includeBase64: false,
-    },
-  };
 
 
 const StepTwo = () => {
 
+  useEffect(
+    ()=>{
+      if (response!=null){
+        console.log(response.toString());
+        history.push("/stepTwoValidation");
+      }
+    }
+    );
+
+  async function handleSelectImage() {
+    
+    try {
+      const results = await DocumentPicker.pickMultiple({
+        type: [DocumentPicker.types.images],
+      })
+      setResponse(results);
+      Alert.alert(results[0].toString());
+      for (const res of results) {
+        console.log(
+          res.uri,
+          res.type, // mime type
+          res.name,
+          res.size,
+        )
+        
+      }
+      
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        Alert.alert(err);      }
+      setResponse(null);
+    }
+
+    if (response!=null){
+      history.push("/stepTwoValidation");
+    }
+    
+  }
+
   const history = useHistory();
   const [response, setResponse] = React.useState<any>(null);
-
-  const onButtonPress = React.useCallback((options) => {
-    ImagePicker.launchImageLibrary(options, setResponse);
-  }, []);
 
   return (
     <Stack alignItems="center">
@@ -48,8 +69,10 @@ const StepTwo = () => {
           source={require('./assets/stepTwo.png')}
         />
       </Box>
-      <PrimaryButton onPress={() => onButtonPress(action.options)} />
-      <Button onPress={()=>{history.push("/stepThree")}}>Saltar</Button>
+      <PrimaryButton onPress={() => handleSelectImage()} />
+      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepThree")}}>
+        <Text fontSize="sm">Saltar paso</Text>
+      </Button>
     </Stack>
   );
 };

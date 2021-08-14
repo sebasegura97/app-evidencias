@@ -4,15 +4,30 @@ import PrimaryButton from '../../../../Shared/PrimaryButton';
 import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
 import { useHistory } from 'react-router-native';
+import { useEffect } from 'react';
 
 
 
 const StepOne = () => {
 
+  useEffect(
+    ()=>{
+      if (response!=null){
+        console.log(response.toString());
+        history.push("/stepOneValidation");
+      }
+    }
+    );
+
   const history = useHistory();
+  const [response, setResponse] = React.useState<any>(null);
+  const [buttonIsEnabled, setButtonIsEnabled] = React.useState<any>(false);
 
     function handleRecord(){
-        RecordScreen.startRecording().catch((error) => console.error(error));
+      console.log("RECORD!");
+      setButtonIsEnabled(true);
+      RecordScreen.startRecording().catch((error) => {console.error(error); setButtonIsEnabled(false)});
+      
     }
     
     async function handleStop(){
@@ -23,6 +38,7 @@ const StepOne = () => {
         }
         //alert(res)
         RecordScreen.clean();
+        setResponse(res);
     }
 
   return (
@@ -39,7 +55,13 @@ const StepOne = () => {
           source={require('./assets/stepOne.png')}
         />
       </Box>
-      <PrimaryButton onPress={()=>{history.push("/stepTwo")}} />
+      <Box height="50px"></Box>
+      <Text>¿Comenzar captura?</Text>
+      <Box height="10px"></Box>
+      <PrimaryButton onPress={()=>handleRecord()} />
+      <Button disabled={!buttonIsEnabled} backgroundColor="transparent" onPress={()=>handleStop()}>
+        <Text fontSize="sm" color={buttonIsEnabled ? "white" : "transparent"}>STOP</Text>
+      </Button>
     </Stack>
   );
 };
