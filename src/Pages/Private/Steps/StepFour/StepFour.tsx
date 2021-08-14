@@ -73,7 +73,7 @@ const StepFour = () => {
       <Box height="15px"></Box>
       <PrimaryButton onPress={() =>handleSelectAudio()} />
       <Box height="10px"></Box>
-      <Button backgroundColor="transparent" onPress={()=>console.log("Go to steps preview")}>
+      <Button backgroundColor="transparent" onPress={()=>history.push("/stepsVerification")}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
     </Stack>

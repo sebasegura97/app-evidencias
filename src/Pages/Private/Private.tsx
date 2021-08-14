@@ -14,6 +14,8 @@ import StepOneValidation from './Steps/StepOne/StepOneValidation';
 import StepTwoValidation from './Steps/StepTwo/StepTwoValidation';
 import StepThreeValidation from './Steps/StepThree/StepThreeValidation';
 import StepFourValidation from './Steps/StepFour/StepFourValidation';
+import StepsVerification from './Steps/StepsVerification';
+import StepsFinish from './Steps/StepsFinish';
 
 const Private = () => {
   return (
@@ -24,6 +26,8 @@ const Private = () => {
         <Route path="/help" component={Help} />
 
         <Route path="/stepsInfo" component={StepsInfo} />
+        <Route path="/stepsVerification" component={StepsVerification} />
+        <Route path="/stepsFinish" component={StepsFinish} />
         <Route path="/stepOne" component={StepOne} />
         <Route path="/stepOneValidation" component={StepOneValidation} />
         <Route path="/stepTwo" component={StepTwo} />

@@ -20,7 +20,7 @@ const StepFourValidation = () => {
       <Box height="50px"></Box>
       <Text>¿Cargar audios?</Text>
       <Box height="15px">  </Box>
-      <PrimaryButton onPress={()=>console.log("Go steps preview")} />
+      <PrimaryButton onPress={()=>history.push("/stepsVerification")} />
       <Box height="10px">  </Box>
       <Button backgroundColor="transparent" onPress={()=>{history.push("/stepFour")}}>
         <Text fontSize="sm">Volver a elegir</Text>
