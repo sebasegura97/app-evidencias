@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Text, Box, Heading, Image, Stack, Button} from 'native-base';
+import {Text, Box, Heading, Image, View, Button} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import { useHistory } from 'react-router-native';
 import { Alert } from 'react-native';
@@ -52,10 +52,11 @@ const StepFour = () => {
   }
 
   const history = useHistory();
+  const handleSkipStep = () => history.push("/stepsVerification");
   const [response, setResponse] = React.useState<any>(null);
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 4</Heading>
       <Text textAlign="center">
         Aquí deberás seleccionar audios
@@ -68,15 +69,13 @@ const StepFour = () => {
           source={require('./assets/stepFour.png')}
         />
       </Box>
-      <Box height="50px"></Box>
+      <Box height="30px"></Box>
       <Text>¿Seleccionar audios?</Text>
-      <Box height="15px"></Box>
-      <PrimaryButton onPress={() =>handleSelectAudio()} />
-      <Box height="10px"></Box>
-      <Button backgroundColor="transparent" onPress={()=>history.push("/stepsVerification")}>
+      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectAudio}} />
+      <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
-    </Stack>
+    </View>
   );
 };
 

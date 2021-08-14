@@ -6,9 +6,12 @@ import PrimaryButton from '../../../../Shared/PrimaryButton';
 
 
 const StepsFinish = () => {
+
   const history = useHistory();
+  const handleFinish = () => history.replace("/home");
+
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Enviado</Heading>
       <Box position="relative" width="250px">
         <Image
@@ -18,14 +21,9 @@ const StepsFinish = () => {
           source={require('./assets/imagen.png')}
         />
       </Box>
-  
       <Text>Tus datos han sido enviados</Text>
-      <Box height="15px"></Box>
-      <PrimaryButton onPress={()=>{history.push("/home")}} />
-      <Box height="20px"></Box>
-
-      
-    </Stack>
+      <PrimaryButton label="Finalizar" buttonProps={{onPress:handleFinish}} /> 
+    </View>
   );
 };
 

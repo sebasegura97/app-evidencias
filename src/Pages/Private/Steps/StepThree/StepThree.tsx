@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, ScrollView} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
-import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
-import * as ImagePicker from 'react-native-image-picker';
 import { useHistory } from 'react-router-native';
 import DocumentPicker from 'react-native-document-picker'
 import { useEffect } from 'react';
@@ -51,11 +49,12 @@ import { useEffect } from 'react';
       
     }
   const history = useHistory();
+  const handleSkipStep = () => history.push("/stepFour");
 
   const [response, setResponse] = React.useState<any>(null);
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 3</Heading>
       <Text textAlign="center">
         Aquí deberás seleccionar videos
@@ -68,11 +67,11 @@ import { useEffect } from 'react';
           source={require('./assets/stepThree.png')}
         />
       </Box>
-      <PrimaryButton onPress={() => handleSelectVideo()} />
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepFour")}}>
+      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectVideo}} />
+      <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
-    </Stack>
+    </View>
   );
 };
 

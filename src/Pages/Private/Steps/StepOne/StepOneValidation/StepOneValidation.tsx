@@ -1,8 +1,5 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
-
-import RecordScreen from 'react-native-record-screen';
-import { Alert } from 'react-native';
 import { useHistory } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 
@@ -11,9 +8,11 @@ import PrimaryButton from '../../../../../Shared/PrimaryButton';
 const StepOneValidation = () => {
 
   const history = useHistory();
+  const handleContinueButton = () => history.push("/stepTwo");
+  const handleGoBack = () => history.goBack();
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 1</Heading>
       <Text textAlign="center">
         Tus capturas de pantalla
@@ -23,16 +22,13 @@ const StepOneValidation = () => {
       <Box width="100%">
         <Text marginX="10px" fontSize="xs" textAlign="left">FileNameHere</Text>
       </Box>
-      <Box height="50px"></Box>
+      <Box height="30px"></Box>
       <Text>¿Está todo bien?</Text>
-      <Box height="15px">  </Box>
-      <PrimaryButton onPress={()=>{history.push("/stepTwo")}} />
-      <Box height="10px">  </Box>
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepOne")}}>
+      <PrimaryButton label="Continuar" buttonProps={{onPress:handleContinueButton}} />
+      <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a grabar</Text>
       </Button>
-      <Box height="30px"></Box>
-    </Stack>
+    </View>
   );
 };
 

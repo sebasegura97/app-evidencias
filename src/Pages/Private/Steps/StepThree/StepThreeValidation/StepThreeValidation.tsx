@@ -8,25 +8,23 @@ import PrimaryButton from '../../../../../Shared/PrimaryButton';
 const StepThreeValidation = () => {
 
   const history = useHistory();
-
+  const handleContinue = () => history.push("/stepFour");
+  const handleGoBack = () => history.goBack();
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 3</Heading>
       <Text textAlign="center">
         Aquí deberás seleccionar videos
       </Text>
       <Box height="20px" ></Box>
       <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="50px"></Box>
+      <Box height="30px"></Box>
       <Text>¿Cargar videos?</Text>
-      <Box height="15px">  </Box>
-      <PrimaryButton onPress={()=>{history.push("/stepFour")}} />
-      <Box height="10px">  </Box>
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepThree")}}>
+      <PrimaryButton label="Continuar" buttonProps={{onPress:handleContinue}} />
+      <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>
       </Button>
-      <Box height="30px"></Box>
-    </Stack>
+    </View>
   );
 }
 

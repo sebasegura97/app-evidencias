@@ -12,9 +12,11 @@ import PrimaryButton from '../../../../Shared/PrimaryButton';
 const StepsVerification = () => {
 
   const history = useHistory();
+  const handleGoBack = () => history.replace("/stepsInfo");
+  const handleContinue = () => history.push("/stepsFinish");
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Verificación</Heading>
       <Text textAlign="center">
         Podrás confirmar o volver a cargar archivos
@@ -35,18 +37,14 @@ const StepsVerification = () => {
       <Text>Audios seleccionados</Text>
       <Box height="20px" ></Box>
       <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="20px"></Box>
-    
-      <Box height="50px"></Box>
+      <Box height="30px"></Box>
       <Text>¿Está todo bien?</Text>
-      <Box height="15px">  </Box>
-      <PrimaryButton onPress={()=>{history.push("/stepsFinish")}} />
-      <Box height="10px">  </Box>
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepsInfo")}}>
+      <PrimaryButton label="Confirmar" buttonProps={{onPress:handleContinue}} />
+      <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>
       </Button>
-      <Box height="30px"></Box>
-    </Stack>
+
+    </View>
   );
 };
 

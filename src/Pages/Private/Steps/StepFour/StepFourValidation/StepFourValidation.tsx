@@ -3,30 +3,27 @@ import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'nativ
 import { useHistory } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 
-
-
 const StepFourValidation = () => {
 
   const history = useHistory();
+  const handleGoBack = () => history.goBack();
+  const handleContinue = () => history.push("/stepsVerification")
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 4</Heading>
       <Text textAlign="center">
         Aquí deberás seleccionar audios
       </Text>
       <Box height="20px" ></Box>
       <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="50px"></Box>
+      <Box height="30px"></Box>
       <Text>¿Cargar audios?</Text>
-      <Box height="15px">  </Box>
-      <PrimaryButton onPress={()=>history.push("/stepsVerification")} />
-      <Box height="10px">  </Box>
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepFour")}}>
+      <PrimaryButton label="Confirmar" buttonProps={{onPress:handleContinue}} />
+      <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>
       </Button>
-      <Box height="30px"></Box>
-    </Stack>
+    </View>
   );
 };
 

@@ -22,9 +22,10 @@ function infoRow(number:String, title:String, subtitle:String){
 const StepsInfo = () => {
 
   const history = useHistory();
+  const handleReadyButton = () => history.push("/stepOne");
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Pasos</Heading>
       <Text textAlign="center">
         Aquí encontraras los pasos a seguir para cargar tu evidencia
@@ -36,10 +37,10 @@ const StepsInfo = () => {
         {infoRow("3","Seleccionar videos","En este paso deberás cargar todos los videos relacionados con la evidencia que estas enviando")}
         {infoRow("4","Seleccionar audios","En este paso deberás cargar todos los audios relacionados con la evidencia que estas enviando")}
       </Box>
-      <Box height="50px"></Box>
-      <PrimaryButton onPress={()=>{history.push("/stepOne")}} />
-      <Box height="30px"></Box>
-    </Stack>
+      <Box height="20px"></Box>
+      <PrimaryButton label="Listo" buttonProps={{onPress:handleReadyButton}} />
+      <Box height="15px"></Box>
+    </View>
   );
 };
 

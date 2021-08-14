@@ -42,7 +42,7 @@ const StepOne = () => {
     }
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 1</Heading>
       <Text textAlign="center">
         Aquí deberás capturar tu pantalla
@@ -55,14 +55,12 @@ const StepOne = () => {
           source={require('./assets/stepOne.png')}
         />
       </Box>
-      <Box height="50px"></Box>
       <Text>¿Comenzar captura?</Text>
-      <Box height="10px"></Box>
-      <PrimaryButton onPress={()=>handleRecord()} />
+      <PrimaryButton label="Capturar" buttonProps={{onPress:handleRecord}} />
       <Button disabled={!buttonIsEnabled} backgroundColor="transparent" onPress={()=>handleStop()}>
         <Text fontSize="sm" color={buttonIsEnabled ? "white" : "transparent"}>STOP</Text>
       </Button>
-    </Stack>
+    </View>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Box, Heading, Image, Stack, Button} from 'native-base';
+import {Text, Box, Heading, Image, Stack, Button, View} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import { useHistory } from 'react-router-native';
 import DocumentPicker from 'react-native-document-picker'
@@ -54,9 +54,10 @@ const StepTwo = () => {
 
   const history = useHistory();
   const [response, setResponse] = React.useState<any>(null);
+  const handleSkipStep = () => history.push("/stepThree");
 
   return (
-    <Stack alignItems="center">
+    <View alignItems="center">
       <Heading>Paso 2</Heading>
       <Text textAlign="center">
         Aquí deberás seleccionar fotos
@@ -69,11 +70,11 @@ const StepTwo = () => {
           source={require('./assets/stepTwo.png')}
         />
       </Box>
-      <PrimaryButton onPress={() => handleSelectImage()} />
-      <Button backgroundColor="transparent" onPress={()=>{history.push("/stepThree")}}>
+      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectImage}} />
+      <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
-    </Stack>
+    </View>
   );
 };
 
