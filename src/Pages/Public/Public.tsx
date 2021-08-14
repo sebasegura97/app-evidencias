@@ -10,7 +10,7 @@ const Public = () => {
   return (
     <NativeRouter>
       <PublicLayout>
-        <Route path="/" component={Home} />
+        <Route path="/" exact component={Home} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
       </PublicLayout>

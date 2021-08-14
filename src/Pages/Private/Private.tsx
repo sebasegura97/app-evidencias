@@ -1,5 +1,5 @@
 import React from 'react';
-import {NativeRouter, Route} from 'react-router-native';
+import {NativeRouter, Route, Redirect} from 'react-router-native';
 
 import Profile from './Profile';
 import Home from './Home';
@@ -21,6 +21,7 @@ const Private = () => {
   return (
     <NativeRouter>
       <PrivateLayout>
+        <Redirect from="/" to="/home" />
         <Route path="/home" component={Home} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
