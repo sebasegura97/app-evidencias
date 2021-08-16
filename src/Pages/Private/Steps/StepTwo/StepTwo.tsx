@@ -70,7 +70,7 @@ const StepTwo = () => {
           source={require('./assets/stepTwo.png')}
         />
       </Box>
-      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectImage}} />
+      <PrimaryButton label="Ver galeria" buttonProps={{onPress:handleSelectImage}} />
       <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>

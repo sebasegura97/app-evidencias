@@ -71,7 +71,7 @@ const StepFour = () => {
       </Box>
       <Box height="30px"></Box>
       <Text>¿Seleccionar audios?</Text>
-      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectAudio}} />
+      <PrimaryButton label="Ver audios" buttonProps={{onPress:handleSelectAudio}} />
       <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>

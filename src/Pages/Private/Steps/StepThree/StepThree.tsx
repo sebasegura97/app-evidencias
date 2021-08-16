@@ -67,7 +67,7 @@ import { useEffect } from 'react';
           source={require('./assets/stepThree.png')}
         />
       </Box>
-      <PrimaryButton label="Seleccionar" buttonProps={{onPress:handleSelectVideo}} />
+      <PrimaryButton label="Ver videos" buttonProps={{onPress:handleSelectVideo}} />
       <Button backgroundColor="transparent" onPress={handleSkipStep}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
