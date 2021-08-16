@@ -40,7 +40,7 @@ const StepOne = () => {
     DeviceEventEmitter.addListener("floating-bubble-press", () => {
       // What to do when user press the bubble
       handleStop();
-      hideFloatingBubble();
+      
     });
    
 
@@ -65,6 +65,7 @@ const StepOne = () => {
     }
     
     async function handleStop(){
+        hideFloatingBubble();
         const res = await RecordScreen.stopRecording().catch((error) => Alert.alert(error));
         Alert.alert("Grabacion guardada en " + "+res.result.outputURL")
         if (res){
@@ -73,6 +74,7 @@ const StepOne = () => {
         //alert(res)
         RecordScreen.clean();
         setResponse(res);
+
     }
 
   return (
