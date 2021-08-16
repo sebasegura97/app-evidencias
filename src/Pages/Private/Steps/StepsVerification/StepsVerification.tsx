@@ -3,8 +3,9 @@ import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'nativ
 
 import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
+import EvidenceModel from '../../../../Models/EvidenceModel';
 
 
 
@@ -12,8 +13,22 @@ import PrimaryButton from '../../../../Shared/PrimaryButton';
 const StepsVerification = () => {
 
   const history = useHistory();
-  const handleGoBack = () => history.replace("/stepsInfo");
-  const handleContinue = () => history.push("/stepsFinish");
+  const location = useLocation();
+
+  let model:EvidenceModel = location.state as EvidenceModel;
+
+  console.log(model);
+
+  const handleGoBack = () => {
+    history.replace("/stepsInfo");
+  }
+
+  const handleContinue = () => {
+    history.push({
+      pathname:"/stepsFinish",
+      state:model,
+    });
+  }
 
   return (
     <View alignItems="center">

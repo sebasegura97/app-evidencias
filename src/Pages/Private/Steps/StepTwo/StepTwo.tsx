@@ -1,24 +1,45 @@
 import React from 'react';
 import {Text, Box, Heading, Image, Stack, Button, View} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import DocumentPicker from 'react-native-document-picker'
 import { Alert } from 'react-native';
 import { useEffect } from 'react';
+import EvidenceModel from '../../../../Models/EvidenceModel';
 
 
 
 
 const StepTwo = () => {
+  
+  const history = useHistory();
+  const [response, setResponse] = React.useState<any>(null);
+  const location = useLocation();
+  
+  let model:EvidenceModel = location.state as EvidenceModel;
 
+  console.log(model);
+  
   useEffect(
     ()=>{
       if (response!=null){
         console.log(response.toString());
-        history.push("/stepTwoValidation");
+        model.images = response;
+        history.push({
+          pathname:"/stepTwoValidation",
+          state:model,
+        });
       }
     }
     );
+
+  const handleSkipStep = () => {
+    model.images = [];
+    history.push({
+      pathname:"/stepThree",
+      state:model,
+    });
+  }
 
   async function handleSelectImage() {
     
@@ -27,34 +48,15 @@ const StepTwo = () => {
         type: [DocumentPicker.types.images],
       })
       setResponse(results);
-      Alert.alert(results[0].toString());
-      for (const res of results) {
-        console.log(
-          res.uri,
-          res.type, // mime type
-          res.name,
-          res.size,
-        )
-        
-      }
       
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
       } else {
         Alert.alert(err);      }
-      setResponse(null);
+      setResponse([]);
     }
-
-    if (response!=null){
-      history.push("/stepTwoValidation");
-    }
-    
   }
-
-  const history = useHistory();
-  const [response, setResponse] = React.useState<any>(null);
-  const handleSkipStep = () => history.push("/stepThree");
 
   return (
     <View alignItems="center">

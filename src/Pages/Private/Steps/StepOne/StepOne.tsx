@@ -3,25 +3,37 @@ import {View, Text, Box, Heading, Image, Stack, Button} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import { useEffect } from 'react';
+import EvidenceModel from '../../../../Models/EvidenceModel';
 
 
 
 const StepOne = () => {
+  
+  const location = useLocation();  
+  const history = useHistory();
+  const [response, setResponse] = React.useState<any>(null);
+  const [buttonIsEnabled, setButtonIsEnabled] = React.useState<any>(false);
+
+  
+  let model:EvidenceModel = location.state as EvidenceModel;
+
+  console.log(model);
+  
 
   useEffect(
     ()=>{
       if (response!=null){
         console.log(response.toString());
-        history.push("/stepOneValidation");
+        model.screenCapture = response;
+        history.push({
+          pathname: "/stepOneValidation",
+          state: model,
+        });
       }
     }
     );
-
-  const history = useHistory();
-  const [response, setResponse] = React.useState<any>(null);
-  const [buttonIsEnabled, setButtonIsEnabled] = React.useState<any>(false);
 
     function handleRecord(){
       console.log("RECORD!");

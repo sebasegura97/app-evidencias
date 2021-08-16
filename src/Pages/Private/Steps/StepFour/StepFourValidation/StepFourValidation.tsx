@@ -1,13 +1,21 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
+import EvidenceModel from '../../../../../Models/EvidenceModel';
 
 const StepFourValidation = () => {
 
   const history = useHistory();
+  const location = useLocation();
+
+  let model:EvidenceModel = location.state as EvidenceModel;
+
   const handleGoBack = () => history.goBack();
-  const handleContinue = () => history.push("/stepsVerification")
+  const handleContinue = () => history.push({
+    pathname:"/stepsVerification",
+    state:model,
+  })
 
   return (
     <View alignItems="center">

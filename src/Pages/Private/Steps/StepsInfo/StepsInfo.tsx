@@ -4,6 +4,7 @@ import PrimaryButton from '../../../../Shared/PrimaryButton';
 import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
 import { useHistory } from 'react-router-native';
+import EvidenceModel from '../../../../Models/EvidenceModel';
 
 function infoRow(number:String, title:String, subtitle:String){
     return (
@@ -22,7 +23,13 @@ function infoRow(number:String, title:String, subtitle:String){
 const StepsInfo = () => {
 
   const history = useHistory();
-  const handleReadyButton = () => history.push("/stepOne");
+  const handleReadyButton = () => {
+    let model:EvidenceModel = new EvidenceModel();
+    history.push({
+      pathname: "/stepOne",
+      state: model,
+    });
+  }
 
   return (
     <View alignItems="center">

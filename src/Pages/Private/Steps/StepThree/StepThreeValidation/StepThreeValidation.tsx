@@ -1,15 +1,24 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
+import EvidenceModel from '../../../../../Models/EvidenceModel';
 
 
 
 const StepThreeValidation = () => {
 
   const history = useHistory();
-  const handleContinue = () => history.push("/stepFour");
+  const location = useLocation();
+
+  let model:EvidenceModel = location.state as EvidenceModel;
+
+  const handleContinue = () => history.push({
+    pathname:"/stepFour",
+    state:model,
+  });
   const handleGoBack = () => history.goBack();
+
   return (
     <View alignItems="center">
       <Heading>Paso 3</Heading>

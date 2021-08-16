@@ -3,15 +3,26 @@ import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'nativ
 
 import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
-import { useHistory } from 'react-router-native';
+import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
+import EvidenceModel from '../../../../../Models/EvidenceModel';
 
 
 
 const StepTwoValidation = () => {
 
   const history = useHistory();
-  const handleContinue = () => history.push("/stepThree");
+  const location  = useLocation();
+
+  let model:EvidenceModel = location.state as EvidenceModel;
+
+  const handleContinue = () => {
+    history.push({
+      pathname:"/stepThree",
+      state:model,
+    });
+  }
+
   const handleGoBack = () => history.goBack();
 
   return (
