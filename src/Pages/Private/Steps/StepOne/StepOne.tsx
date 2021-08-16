@@ -55,17 +55,15 @@ const StepOne = () => {
       console.log("RECORD!");
       setButtonIsEnabled(true);
       RecordScreen.startRecording().then(()=>{
-        initialize()
-        .then(() => console.log("Initialized the bubble mange"));
-        showFloatingBubble().then(()=>{console.log("Showing bubble")});
+        // initialize()
+        // .then(() => console.log("Initialized the bubble mange"));
+        // showFloatingBubble().then(()=>{console.log("Showing bubble")});
       })
       .catch((error) => {console.error(error); setButtonIsEnabled(false)});
-
-      
     }
     
     async function handleStop(){
-        hideFloatingBubble();
+        //hideFloatingBubble();
         const res = await RecordScreen.stopRecording().catch((error) => Alert.alert(error));
         Alert.alert("Grabacion guardada en " + "+res.result.outputURL")
         if (res){
