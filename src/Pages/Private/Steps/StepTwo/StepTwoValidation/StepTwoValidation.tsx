@@ -16,6 +16,8 @@ const StepTwoValidation = () => {
 
   let model:EvidenceModel = location.state as EvidenceModel;
 
+  console.log(model);
+
   const handleContinue = () => {
     history.push({
       pathname:"/stepThree",
@@ -32,7 +34,14 @@ const StepTwoValidation = () => {
         Aquí deberás seleccionar fotos
       </Text>
       <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
+      <Box position="relative" width="180px">
+        <Image
+          resizeMode="contain"
+          alt="background"
+          height={350}
+          source={(model.images[0].uri.toString())}
+        />
+      </Box>
       <Box height="30px"></Box>
       <Text>¿Listo?</Text>
       <PrimaryButton label="Continuar" buttonProps={{onPress:handleContinue}} />
