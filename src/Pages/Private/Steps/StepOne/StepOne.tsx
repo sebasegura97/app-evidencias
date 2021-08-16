@@ -7,6 +7,10 @@ import { useHistory, useLocation } from 'react-router-native';
 import { useEffect } from 'react';
 import EvidenceModel from '../../../../Models/EvidenceModel';
 
+// @ts-nocheck
+import { showFloatingBubble, hideFloatingBubble, requestPermission, initialize } from "react-native-floating-bubble"
+import { DeviceEventEmitter } from 'react-native';
+
 
 
 const StepOne = () => {
@@ -20,7 +24,6 @@ const StepOne = () => {
   let model:EvidenceModel = location.state as EvidenceModel;
 
   console.log(model);
-  
 
   useEffect(
     ()=>{
@@ -32,13 +35,32 @@ const StepOne = () => {
           state: model,
         });
       }
-    }
-    );
+    });
+
+    DeviceEventEmitter.addListener("floating-bubble-press", () => {
+      // What to do when user press the bubble
+      handleStop();
+      hideFloatingBubble();
+    });
+   
 
     function handleRecord(){
+      requestPermission()
+      .then(() => console.log("Permission Granted"))
+      .catch(() => {
+        console.log("Permission is not granted");
+        return;
+      })
+      
       console.log("RECORD!");
       setButtonIsEnabled(true);
-      RecordScreen.startRecording().catch((error) => {console.error(error); setButtonIsEnabled(false)});
+      RecordScreen.startRecording().then(()=>{
+        initialize()
+        .then(() => console.log("Initialized the bubble mange"));
+        showFloatingBubble().then(()=>{console.log("Showing bubble")});
+      })
+      .catch((error) => {console.error(error); setButtonIsEnabled(false)});
+
       
     }
     

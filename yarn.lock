@@ -6763,6 +6763,11 @@
     "react-native-ratings" "8.0.4"
     "react-native-size-matters" "^0.3.1"
 
+"react-native-floating-bubble@^1.0.7":
+  "integrity" "sha512-vAGe3UwhyGukne1jDt6lh40JUzVN1itJ+71RiNPQV1wmFwmyoXlkHKl6FrrNqLtQSsX2qLP8Z2UGqTC3foXOfQ=="
+  "resolved" "https://registry.npmjs.org/react-native-floating-bubble/-/react-native-floating-bubble-1.0.7.tgz"
+  "version" "1.0.7"
+
 "react-native-linear-gradient@^2.5.6":
   "integrity" "sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg=="
   "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz"
@@ -6852,7 +6857,7 @@
     "whatwg-fetch" "^3.0.0"
     "ws" "^7.4.6"
 
-"react-native@*", "react-native@^0.64.0", "react-native@>=0.44", "react-native@>=0.50.0", "react-native@>=0.55", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.1":
+"react-native@*", "react-native@^0.41.2", "react-native@^0.64.0", "react-native@>=0.44", "react-native@>=0.50.0", "react-native@>=0.55", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.1":
   "integrity" "sha512-jvSj+hNAfwvhaSmxd5KHJ5HidtG0pDXzoH6DaqNpU74g3CmAiA8vuk58B5yx/DYuffGq6PeMniAcwuh3Xp4biQ=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.1.tgz"
   "version" "0.64.1"
