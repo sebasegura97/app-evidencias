@@ -1,15 +1,24 @@
 import {useState, useEffect} from 'react';
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-const useMe = () => {
+type Me = FirebaseAuthTypes.User | null;
+
+type UseMeReturnType = {
+  user: Me;
+  initializing: boolean;
+};
+
+const useMe = (): UseMeReturnType => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<Me | null>(null);
 
   // Handle user state changes
-  function onAuthStateChanged(user: any) {
-    setUser(user);
-    if (initializing) setInitializing(false);
+  function onAuthStateChanged(userData: Me) {
+    setUser(userData);
+    if (initializing) {
+      setInitializing(false);
+    }
   }
 
   useEffect(() => {

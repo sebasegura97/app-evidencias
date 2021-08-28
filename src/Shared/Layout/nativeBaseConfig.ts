@@ -1,5 +1,5 @@
-import { extendTheme } from 'native-base';
-import { INativebaseConfig } from 'native-base/lib/typescript/core/NativeBaseContext';
+import {extendTheme} from 'native-base';
+import {INativebaseConfig} from 'native-base/lib/typescript/core/NativeBaseContext';
 import colors from '../../Constants/colors';
 
 export const nativeBaseConfig: INativebaseConfig = {
@@ -23,8 +23,8 @@ export const theme = extendTheme({
         paddingBottom: 4,
         placeholderTextColor: colors.grey,
         _focus: {
-          borderColor: '#FFFFFF'
-        }
+          borderColor: '#FFFFFF',
+        },
       },
     },
   },

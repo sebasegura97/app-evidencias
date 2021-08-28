@@ -1,24 +1,27 @@
 import React from 'react';
-import {GestureResponderEvent} from 'react-native';
-import {Pressable, Text} from 'native-base';
+import {Button, IButtonProps, Text} from 'native-base';
 import colors from '../../Constants/colors';
 
 interface LinkButtonProps {
-  onPress: (event: GestureResponderEvent) => void;
+  buttonProps?: IButtonProps;
   loading?: boolean;
   label: string;
 }
 
-const LinkButton: React.FC<LinkButtonProps> = ({onPress, loading, label}) => {
+const LinkButton: React.FC<LinkButtonProps> = ({
+  buttonProps,
+  loading,
+  label,
+}) => {
   return (
-    <Pressable onPress={onPress} disabled={loading}>
+    <Button {...buttonProps} style={{backgroundColor: 'transparent'}}>
       <Text
         textAlign="center"
         fontSize="xs"
         color={loading ? colors.grey : colors.white}>
         {label}
       </Text>
-    </Pressable>
+    </Button>
   );
 };
 

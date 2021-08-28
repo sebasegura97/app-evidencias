@@ -6,16 +6,19 @@ import {GradientBackground} from './Layout.styles';
 import {nativeBaseConfig, theme} from './nativeBaseConfig';
 import Header from '../Header';
 import BottomNavigation from '../BottomNavigation';
+import {useAppContext} from '../AppContext/AppContex';
 
 const PrivateLayout: React.FC = ({children}) => {
+  const {showHeader, showNavigation} = useAppContext();
+
   return (
     <NativeBaseProvider config={nativeBaseConfig} theme={theme}>
       <Box safeAreaTop flex={1}>
-        <Header title="Titulo" />
+        {showHeader && <Header title="Titulo" />}
         <GradientBackground>
           <ScrollView>{children}</ScrollView>
         </GradientBackground>
-        <BottomNavigation />
+        {showNavigation && <BottomNavigation />}
       </Box>
     </NativeBaseProvider>
   );

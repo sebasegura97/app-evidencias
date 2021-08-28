@@ -41,7 +41,9 @@ const Home = () => {
         />
         <Box marginTop={2}>
           <LinkButton
-            onPress={handleSignup}
+            buttonProps={{
+              onPress: handleSignup,
+            }}
             loading={loading}
             label="Registrarme"
           />
