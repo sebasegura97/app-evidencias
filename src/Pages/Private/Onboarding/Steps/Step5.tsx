@@ -10,6 +10,7 @@ import {TYC} from '../constants';
 import {useOnboardingContext} from '../OnboardingContext';
 import StepLayout from './StepLayout';
 import useMe from '../../../../Shared/Hooks/useMe';
+import {useHistory} from 'react-router-native';
 
 const isCloseToBottom = ({
   layoutMeasurement,
@@ -26,6 +27,7 @@ const isCloseToBottom = ({
 const Step5: FC = () => {
   const {user} = useMe();
   const {form} = useOnboardingContext();
+  const history = useHistory();
   const watchScroll = form?.watch('hasReachTycEnd');
 
   const [hasReadedTyc, setHasReadedTyc] = useState(false);
@@ -41,10 +43,18 @@ const Step5: FC = () => {
     setLoading(true);
     if (form && user) {
       try {
-        await firestore()
-          .collection('Users')
-          .doc(user.uid)
-          .set(form?.getValues());
+        const userCollection = firestore().collection(user.uid);
+        const displayName = `${form.getValues('name')} ${form.getValues(
+          'lastname',
+        )}`;
+        user.updateProfile({
+          displayName,
+        });
+        await userCollection.doc('Onboarding').set(form?.getValues());
+        await userCollection.doc('UserData').set({
+          hasCompletedOnboarding: true,
+        });
+        history.push('/home');
       } catch (error) {
         console.error(error);
       }

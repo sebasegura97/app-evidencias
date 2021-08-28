@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {NativeRouter, Route, Redirect, useHistory} from 'react-router-native';
+import React from 'react';
+import {NativeRouter, Route, Redirect} from 'react-router-native';
 
 import {PrivateLayout} from '../../Shared/Layout';
 import Profile from './Profile';
@@ -7,16 +7,16 @@ import Home from './Home';
 import Help from './Help';
 import Onboarding from './Onboarding';
 import {AppContextProvider} from '../../Shared/AppContext/AppContex';
+import useMe from '../../Shared/Hooks/useMe';
 
 const Private = () => {
-  const history = useHistory();
-  const [userData, setUserData] = useState(false);
+  const {profile} = useMe();
 
   return (
     <NativeRouter>
       <AppContextProvider>
         <PrivateLayout>
-          {userData ? (
+          {profile?.hasCompletedOnboarding ? (
             <Redirect from="/" to="/home" />
           ) : (
             <Redirect from="/" to="/onboarding/step1" />

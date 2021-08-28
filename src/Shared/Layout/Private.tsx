@@ -7,9 +7,24 @@ import {nativeBaseConfig, theme} from './nativeBaseConfig';
 import Header from '../Header';
 import BottomNavigation from '../BottomNavigation';
 import {useAppContext} from '../AppContext/AppContex';
+import {useHistory} from 'react-router-native';
 
 const PrivateLayout: React.FC = ({children}) => {
-  const {showHeader, showNavigation} = useAppContext();
+  const {showHeader, showNavigation, setShowHeader, setShowNavigation} =
+    useAppContext();
+  const history = useHistory();
+
+  history.listen(location => {
+    if (setShowNavigation && setShowHeader) {
+      if (location.pathname.startsWith('/onboarding')) {
+        setShowHeader(false);
+        setShowNavigation(false);
+      } else {
+        setShowHeader(true);
+        setShowNavigation(true);
+      }
+    }
+  });
 
   return (
     <NativeBaseProvider config={nativeBaseConfig} theme={theme}>

@@ -1,10 +1,13 @@
 import React, {createContext, FC, useContext, useEffect} from 'react';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {defaultFormData, TOTAL_STEPS} from './constants';
-
-import {FormData, OnboardingContextType} from './types';
 import {useHistory} from 'react-router-native';
+
+import firestore from '@react-native-firebase/firestore';
+
+import {defaultFormData, TOTAL_STEPS} from './constants';
+import {FormData, OnboardingContextType} from './types';
+import useMe from '../../../Shared/Hooks/useMe';
 
 export const OnboardingContext = createContext<OnboardingContextType>({
   currentStep: 1,
@@ -12,6 +15,7 @@ export const OnboardingContext = createContext<OnboardingContextType>({
 });
 
 export const OnboardingContextProvider: FC = ({children}) => {
+  const {user} = useMe();
   const [currentStep, setCurrentStep] = useState(1);
   const history = useHistory();
 
@@ -34,6 +38,22 @@ export const OnboardingContextProvider: FC = ({children}) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (form && user?.uid) {
+        const result = await firestore()
+          .collection(user?.uid)
+          .doc('Onboarding')
+          .get();
+
+        form.reset(result.data());
+      }
+    };
+    fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <OnboardingContext.Provider
