@@ -23,7 +23,9 @@ const Profile = () => {
       <LinkButton
         label="Cerrar sesión"
         loading={loading}
-        onPress={handleSignout}
+        buttonProps={{
+          onPress: handleSignout,
+        }}
       />
     </View>
   );
