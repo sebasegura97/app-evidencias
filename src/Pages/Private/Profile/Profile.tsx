@@ -107,11 +107,11 @@ const Profile = () => {
         </Stack>
       </Box>
       <Box marginY="15px">
-        <LinkButton
+        {/* <LinkButton
           label="Cerrar sesión"
           loading={loading}
           onPress={handleSignout}
-        />
+        /> */}
       </Box>
     </View>
   );

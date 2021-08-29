@@ -128,7 +128,9 @@ const Signup = () => {
         />
         <Box marginTop={2}>
           <LinkButton
-            onPress={handleLogin}
+            buttonProps={{
+              onPress: handleLogin,
+            }}
             loading={loading}
             label="Iniciar sesión"
           />

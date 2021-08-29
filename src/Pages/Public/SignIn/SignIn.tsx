@@ -53,7 +53,7 @@ const SignIn = () => {
         {' '}
         Iniciar sesión{' '}
       </Heading>
-      <Box position="relative" width="100%">
+      <Box width="100%">
         <FormControl>
           <Stack>
             <FormControl.Label>Email</FormControl.Label>
@@ -126,7 +126,9 @@ const SignIn = () => {
         />
         <Box marginTop={2}>
           <LinkButton
-            onPress={handleSignup}
+            buttonProps={{
+              onPress: handleSignup,
+            }}
             loading={loading}
             label="Registrarme"
           />

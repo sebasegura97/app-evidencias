@@ -1,19 +1,21 @@
 import React from 'react';
-import {Animated, Easing, GestureResponderEvent} from 'react-native';
-import {Pressable, Center, Circle, Text, Box, Button} from 'native-base';
+import {Animated, Easing} from 'react-native';
+import {Center, Circle, Text, Box, Button} from 'native-base';
 import {IButtonProps} from 'native-base';
 import colors from '../../Constants/colors';
 import {useEffect} from 'react';
 
 interface PrimaryButtonProps {
-  buttonProps: IButtonProps;
+  buttonProps?: IButtonProps;
   loading?: boolean;
+  disabled?: boolean;
   label: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   buttonProps,
   loading,
+  disabled = false,
   label,
 }) => {
   // First set up animation
@@ -42,6 +44,20 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     animation.stop();
   };
 
+  const getButtonBorderBackground = () => {
+    if (!disabled) {
+      return {
+        linearGradient: {
+          colors: [colors.secondaryLight, colors.primaryMain],
+          start: [1, 1],
+          end: [1, 0],
+        },
+      };
+    } else {
+      return colors.grey;
+    }
+  };
+
   useEffect(() => {
     if (loading) {
       startAnimation();
@@ -52,25 +68,17 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   }, [loading]);
 
   return (
-    <Button {...buttonProps} style={{backgroundColor: 'transparent'}}>
+    <Button {...buttonProps} bgColor="transparent">
       <Box position="relative" alignItems="center">
         <Animated.View style={{transform: [{rotate: spin}]}}>
-          <Circle
-            style={{width: 78, height: 78}}
-            bg={{
-              linearGradient: {
-                colors: [colors.secondaryLight, colors.primaryMain],
-                start: [1, 1],
-                end: [1, 0],
-              },
-            }}
-          />
+          <Circle w={84} h={84} bg={getButtonBorderBackground()} />
         </Animated.View>
         <Center position="absolute" inset="0">
           <Circle
-            style={{width: 72, height: 72}}
+            w={78}
+            h={78}
             padding={2}
-            bg={colors.bgPrimaryDark}>
+            bg={disabled ? colors.darkGrey : colors.bgPrimaryDark}>
             <Center>
               <Text textAlign="center" fontSize="xs" lineHeight={16}>
                 {label}

@@ -6,6 +6,7 @@ enum colors {
   secondaryLight = '#B100FB',
   white = '#FFF',
   grey = '#848484',
+  darkGrey = '#2F2E41',
   error = '#FF7B7B',
 }
 
