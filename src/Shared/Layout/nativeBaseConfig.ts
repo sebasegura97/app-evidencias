@@ -14,6 +14,11 @@ export const theme = extendTheme({
     initialColorMode: 'dark',
   },
   components: {
+    TextArea: {
+      baseStyle: {
+        textAlignVertical: 'top',
+      },
+    },
     Input: {
       baseStyle: {
         borderColor: 'transparent',
