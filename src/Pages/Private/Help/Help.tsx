@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Text} from 'native-base';
+import {View, Heading} from 'native-base';
+import AskForm from './components/AskForm';
+import FAQ from './components/FAQ';
 
 const Help = () => {
   return (
     <View>
-      <Text> Help </Text>
+      <Heading mb={4} textAlign="center">
+        {' '}
+        Ayuda{' '}
+      </Heading>
+      <AskForm />
+      <FAQ />
     </View>
   );
 };
