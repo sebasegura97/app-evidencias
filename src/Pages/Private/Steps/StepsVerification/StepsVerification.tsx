@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
+import {View, Text, Box, Heading, Image, Stack, Button, Row, Column, ScrollView} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../Models/EvidenceModel';
@@ -32,6 +32,57 @@ const StepsVerification = () => {
     []
   );
 
+  const generateVideoChildren = () => {
+    let array:any[] = [];
+    model.videos.forEach(element => {
+      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+    });
+    return array;
+  }
+
+  const generateImageChildren = () => {
+    let array:any[] = [];
+    model.images.forEach(element => {
+      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+    });
+    return array;
+  }
+
+  const generateAudioChildren = () => {
+    let array:any[] = [];
+    model.audios.forEach(element => {
+      array.push(audioBox(element["name"],element["fileCopyUri"]));
+    });
+    return array;
+  }
+
+  const audioBox = (fileName:string, key:string) => {
+    return (
+      <Box key={key} marginTop="5px" marginBottom="5px" width="100%" backgroundColor="#010121" style={{flexDirection:"row", borderRadius:15}}>
+        <Box style={{flex:0, borderRadius:15}} height="80px" width="100px"  justifyContent="center" alignItems="center">
+          <Image alt=" " resizeMode="contain" size="20" source={require('./assets/icon_audio.png')}></Image>
+        </Box>
+        <Box paddingLeft="0" paddingRight="5" style={{flex:1, flexDirection:"column", justifyContent:"space-evenly"}}  >
+          <Text fontSize="sm">{fileName}</Text>
+        </Box>
+    </Box>
+    );
+  }
+
+  const imageBox = (path:string, key:string) => {
+    return (
+      <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
+        {/* XQ MIER NO SE MUESTRA LA IMAGEN????? */}
+        <Image
+          alt=" "
+          maxHeight="200px"
+          resizeMode="contain"
+          source={{uri:path}}
+        />
+      </Box>
+    );
+  }
+
   return (
     <View alignItems="center">
       <Heading>Verificación</Heading>
@@ -41,11 +92,11 @@ const StepsVerification = () => {
       <Text marginTop="10px" marginBottom="10px">Grabación de pantalla</Text>
       <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
       <Text marginTop="10px" marginBottom="10px">Fotos seleccionadas</Text>
-      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <ScrollView horizontal={true} children={generateImageChildren()}/>
       <Text marginTop="10px" marginBottom="10px">Videos seleccionados</Text>
-      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <ScrollView horizontal={true} children={generateVideoChildren()}/>
       <Text marginTop="10px" marginBottom="10px">Audios seleccionados</Text>
-      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <ScrollView width="100%" children={generateAudioChildren()}/>
       <Text marginTop="10px" marginBottom="10px">¿Está todo bien?</Text>
       <PrimaryButton label="Confirmar" buttonProps={{onPress:handleContinue}} />
       <Button backgroundColor="transparent" onPress={handleGoBack}>

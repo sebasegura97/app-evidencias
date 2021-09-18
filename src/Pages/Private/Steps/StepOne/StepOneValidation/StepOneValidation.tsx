@@ -14,7 +14,7 @@ const StepOneValidation = () => {
   
   let model:EvidenceModel = location.state as EvidenceModel;
   
-  console.log(model);
+  const fileSplit:[string] = model.screenCapture["result"]["outputURL"].toString().split("/");
 
   const handleContinueButton = () => {
     history.push({
@@ -30,9 +30,9 @@ const StepOneValidation = () => {
         Tus capturas de pantalla
       </Text>
       <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
+      <Box height="350px" width="100%" backgroundColor="red" marginBottom="5px"></Box>
       <Box width="100%">
-        <Text marginX="10px" fontSize="xs" textAlign="left">{model.screenCapture["result"]["outputURL"]}</Text>
+        <Text marginX="10px" fontSize="xs" textAlign="left">{fileSplit[fileSplit.length-1]}</Text>
       </Box>
       <Box height="30px"></Box>
       <Text>¿Está todo bien?</Text>

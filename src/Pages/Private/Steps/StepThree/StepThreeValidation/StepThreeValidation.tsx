@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
+import {View, Text, Box, Heading, Image, Stack, Button, Row, Column, ScrollView} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
@@ -17,18 +17,39 @@ const StepThreeValidation = () => {
     pathname:"/stepFour",
     state:model,
   });
+
   const handleGoBack = () => history.goBack();
+
+  const generateChildren = () => {
+    let array:any[] = [];
+    model.videos.forEach(element => {
+      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+    });
+    return array;
+  }
+
+  const imageBox = (path:string, key:string) => {
+    return (
+      <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
+        {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
+        <Image
+          alt=" "
+          maxHeight="200px"
+          resizeMode="contain"
+          source={{uri:path}}
+        />
+      </Box>
+    );
+  }
 
   return (
     <View alignItems="center">
       <Heading>Paso 3</Heading>
-      <Text textAlign="center">
+      <Text textAlign="center" marginBottom="30px">
         Aquí deberás seleccionar videos
       </Text>
-      <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="30px"></Box>
-      <Text>¿Cargar videos?</Text>
+      <ScrollView horizontal={true} marginBottom="20px" marginTop="20px" children={generateChildren()} />
+      <Text marginTop="40px">Cargar videos?</Text>
       <PrimaryButton label="Continuar" buttonProps={{onPress:handleContinue}} />
       <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>
