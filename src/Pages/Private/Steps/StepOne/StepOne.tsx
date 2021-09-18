@@ -7,8 +7,8 @@ import { useHistory, useLocation } from 'react-router-native';
 import { useEffect } from 'react';
 import EvidenceModel from '../../../../Models/EvidenceModel';
 
-// @ts-nocheck
-import { showFloatingBubble, hideFloatingBubble, requestPermission, initialize } from "react-native-floating-bubble"
+// @ts-ignore 1
+import { showFloatingBubble, hideFloatingBubble, requestPermission, initialize } from 'react-native-floating-bubble'
 import { DeviceEventEmitter } from 'react-native';
 
 
@@ -55,16 +55,16 @@ const StepOne = () => {
       console.log("RECORD!");
       setButtonIsEnabled(true);
       RecordScreen.startRecording().then(()=>{
-        // initialize()
-        // .then(() => console.log("Initialized the bubble mange"));
-        // showFloatingBubble().then(()=>{console.log("Showing bubble")});
+        initialize()
+        .then(() => console.log("Initialized the bubble mange"));
+        showFloatingBubble().then(()=>{console.log("Showing bubble")});
       })
-      .catch((error) => {console.error(error); setButtonIsEnabled(false)});
+      .catch((error:any) => {console.error(error); setButtonIsEnabled(false)});
     }
     
     async function handleStop(){
         //hideFloatingBubble();
-        const res = await RecordScreen.stopRecording().catch((error) => Alert.alert(error));
+        const res = await RecordScreen.stopRecording().catch((error:any) => Alert.alert(error));
         Alert.alert("Grabacion guardada en " + "+res.result.outputURL")
         if (res){
             const url = res.result.outputURL;

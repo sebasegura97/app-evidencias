@@ -40,10 +40,12 @@ const StepThree = () => {
       })
       setResponse(results);
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // User cancelled the picker, exit any dialogs or menus and move on
-      } else {
-        Alert.alert(err);      }
+      // if (DocumentPicker.isCancel(err)) {
+      //   // User cancelled the picker, exit any dialogs or menus and move on
+      // } else {
+      //   Alert.alert(err);     
+      // }
+      Alert.alert("ERROR");     
       setResponse(null);
     }
   }

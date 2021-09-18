@@ -45,11 +45,12 @@ const StepFour = () => {
       })
       setResponse(results);
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // User cancelled the picker, exit any dialogs or menus and move on
-      } else {
-        Alert.alert(err);      
-      }
+      // if (DocumentPicker.isCancel(err)) {
+      //   // User cancelled the picker, exit any dialogs or menus and move on
+      // } else {
+      //   Alert.alert("Error");      
+      // }
+      Alert.alert("Error");      
     }
   }
 
