@@ -9,6 +9,7 @@ import {useState} from 'react';
 import { boxShadow } from 'styled-system';
 import AlternativeButton from '../../../Shared/AlternativeButton';
 import { useHistory } from 'react-router-native';
+import useMe from '../../../Shared/Hooks/useMe';
 
 type FormData = {
   email: string;
@@ -17,6 +18,8 @@ type FormData = {
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
+
+  const {user} = useMe();
 
   const handleSignout = async () => {
     setLoading(true);
