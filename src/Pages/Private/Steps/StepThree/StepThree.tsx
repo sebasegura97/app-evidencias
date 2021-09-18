@@ -17,12 +17,12 @@ const StepThree = () => {
 
   let model:EvidenceModel = location.state as EvidenceModel;
 
-  console.log(model);
+ 
   
   useEffect(
     ()=>{
       if (response!=null){
-        console.log(response.toString());
+        
         model.videos = response;
         history.push({
           pathname:"/stepThreeValidation",

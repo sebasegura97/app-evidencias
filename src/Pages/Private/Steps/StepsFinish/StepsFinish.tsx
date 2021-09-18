@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {View, Text, Stack, Heading, Box, Image} from 'native-base';
 
 import { useHistory } from 'react-router-native';
@@ -21,7 +21,7 @@ const StepsFinish = () => {
           source={require('./assets/imagen.png')}
         />
       </Box>
-      <Text>Tus datos han sido enviados</Text>
+      <Text marginBottom="20px">Tus datos han sido enviados</Text>
       <PrimaryButton label="Finalizar" buttonProps={{onPress:handleFinish}} /> 
     </View>
   );

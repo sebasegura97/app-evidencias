@@ -32,7 +32,7 @@ const StepOneValidation = () => {
       <Box height="20px" ></Box>
       <Box height="350px" width="100%" backgroundColor="red"></Box>
       <Box width="100%">
-        <Text marginX="10px" fontSize="xs" textAlign="left">FileNameHere</Text>
+        <Text marginX="10px" fontSize="xs" textAlign="left">{model.screenCapture["result"]["outputURL"]}</Text>
       </Box>
       <Box height="30px"></Box>
       <Text>¿Está todo bien?</Text>

@@ -18,12 +18,12 @@ const StepTwo = () => {
   
   let model:EvidenceModel = location.state as EvidenceModel;
 
-  console.log(model);
+  
   
   useEffect(
     ()=>{
       if (response!=null){
-        console.log(response.toString());
+      
         model.images = response;
         history.push({
           pathname:"/stepTwoValidation",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
@@ -14,8 +14,6 @@ const StepsVerification = () => {
 
   let model:EvidenceModel = location.state as EvidenceModel;
 
-  console.log(model);
-
   const handleGoBack = () => {
     history.replace("/stepsInfo");
   }
@@ -27,30 +25,28 @@ const StepsVerification = () => {
     });
   }
 
+  useEffect(
+    ()=>{
+      model != null ? console.log(model) : console.log("Null model");
+    },
+    []
+  );
+
   return (
     <View alignItems="center">
       <Heading>Verificación</Heading>
-      <Text textAlign="center">
+      <Text marginTop="10px" marginBottom="10px" textAlign="center">
         Podrás confirmar o volver a cargar archivos
       </Text>
-      <Box height="20px"></Box>
-      <Text>Grabación de pantalla</Text>
-      <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="20px"></Box>
-      <Text>Fotos seleccionadas</Text>
-      <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="20px"></Box>
-      <Text>Videos seleccionados</Text>
-      <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="20px"></Box>
-      <Text>Audios seleccionados</Text>
-      <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red"></Box>
-      <Box height="30px"></Box>
-      <Text>¿Está todo bien?</Text>
+      <Text marginTop="10px" marginBottom="10px">Grabación de pantalla</Text>
+      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <Text marginTop="10px" marginBottom="10px">Fotos seleccionadas</Text>
+      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <Text marginTop="10px" marginBottom="10px">Videos seleccionados</Text>
+      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <Text marginTop="10px" marginBottom="10px">Audios seleccionados</Text>
+      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <Text marginTop="10px" marginBottom="10px">¿Está todo bien?</Text>
       <PrimaryButton label="Confirmar" buttonProps={{onPress:handleContinue}} />
       <Button backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>

@@ -14,20 +14,18 @@ const StepFour = () => {
   const location = useLocation();
 
   let model:EvidenceModel = location.state as EvidenceModel;
-
-  console.log(model);
   
   useEffect(
     ()=>{
       if (response!=null){
-        console.log(response.toString());
         model.audios = response;
         history.push({
           pathname:"/stepFourValidation",
           state:model,
         });
       }
-    }
+    },
+    []
   );
 
   const handleSkipStep = () => {

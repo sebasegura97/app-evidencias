@@ -20,10 +20,7 @@ const StepOne = () => {
   const [response, setResponse] = React.useState<any>(null);
   const [buttonIsEnabled, setButtonIsEnabled] = React.useState<any>(false);
 
-  
   let model:EvidenceModel = location.state as EvidenceModel;
-
-  console.log(model);
 
   useEffect(
     ()=>{
