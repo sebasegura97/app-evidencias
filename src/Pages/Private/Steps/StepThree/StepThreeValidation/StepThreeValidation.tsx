@@ -31,7 +31,6 @@ const StepThreeValidation = () => {
   const imageBox = (path:string,name:string, key:string) => {
     return (
       <Box key={key} justifyContent="flex-start" alignItems="center" marginLeft="5px" marginRight="5px" position="relative" maxWidth="150px" minHeight="230px">
-        {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
         <Image
           alt=" "
           maxHeight="200px"
@@ -40,7 +39,7 @@ const StepThreeValidation = () => {
           source={require('../assets/icon_video.png')}
           //source={{uri:path}}
         />
-        <Text>{name}</Text>
+        <Text fontSize="xs" marginTop="10px">{name}</Text>
       </Box>
     );
   }

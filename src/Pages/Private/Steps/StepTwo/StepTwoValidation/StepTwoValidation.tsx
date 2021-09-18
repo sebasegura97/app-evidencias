@@ -34,8 +34,6 @@ const StepTwoValidation = () => {
   const imageBox = (path:string, name:string,key:string) => {
     return (
       <Box alignItems="center" justifyContent="flex-start" key={key}  marginLeft="5px" marginRight="5px" position="relative" maxWidth="150px" maxHeight="230px">
-        {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
-        
           <Row>
             <Image
               alt=" "
@@ -47,9 +45,8 @@ const StepTwoValidation = () => {
             />
           </Row>
           <Row>
-            <Text>{name}</Text>
+          <Text fontSize="xs" marginTop="10px">{name}</Text>
           </Row>
-     
       </Box>
     );
   }

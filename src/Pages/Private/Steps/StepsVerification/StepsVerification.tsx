@@ -80,7 +80,7 @@ const StepsVerification = () => {
           //source={{uri:path}}
           source={require('./assets/icon_image.png')}
         />
-        <Text marginTop="10px">{name}</Text>
+        <Text fontSize="xs" marginTop="10px">{name}</Text>
       </Box>
     );
   }
@@ -93,7 +93,7 @@ const StepsVerification = () => {
           //source={{uri:path}}
           source={require('./assets/icon_video.png')}
         />
-        <Text marginTop="10px">{name}</Text>
+        <Text fontSize="xs" marginTop="10px">{name}</Text>
       </Box>
     );
   }
