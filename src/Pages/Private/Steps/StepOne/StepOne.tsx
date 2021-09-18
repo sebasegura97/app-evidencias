@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import EvidenceModel from '../../../../Models/EvidenceModel';
 
 // @ts-ignore 1
-import { showFloatingBubble, hideFloatingBubble, requestPermission, initialize } from 'react-native-floating-bubble'
+//import { showFloatingBubble, hideFloatingBubble, requestPermission, initialize } from 'react-native-floating-bubble'
 import { DeviceEventEmitter } from 'react-native';
 
 
@@ -42,19 +42,19 @@ const StepOne = () => {
    
 
     function handleRecord(){
-      requestPermission()
-      .then(() => console.log("Permission Granted"))
-      .catch(() => {
-        console.log("Permission is not granted");
-        return;
-      })
+      //requestPermission()
+      //.then(() => console.log("Permission Granted"))
+      // .catch(() => {
+      //   console.log("Permission is not granted");
+      //   return;
+      // })
       
       console.log("RECORD!");
       setButtonIsEnabled(true);
       RecordScreen.startRecording().then(()=>{
-        initialize()
-        .then(() => console.log("Initialized the bubble mange"));
-        showFloatingBubble().then(()=>{console.log("Showing bubble")});
+        //initialize()
+        //.then(() => console.log("Initialized the bubble mange"));
+        //showFloatingBubble().then(()=>{console.log("Showing bubble")});
       })
       .catch((error:any) => {console.error(error); setButtonIsEnabled(false)});
     }

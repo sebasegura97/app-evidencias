@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import {View, Text, Box, Heading, Image, Stack, Button, Row, Column, ScrollView} from 'native-base';
+import {View, Text, Box, Heading, Stack ,Button, Row, Column, ScrollView} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../Models/EvidenceModel';
+import { Image, Image as nativeImage } from 'react-native';
+
 
 
 
@@ -60,7 +62,7 @@ const StepsVerification = () => {
     return (
       <Box key={key} marginTop="5px" marginBottom="5px" width="100%" backgroundColor="#010121" style={{flexDirection:"row", borderRadius:15}}>
         <Box style={{flex:0, borderRadius:15}} height="80px" width="100px"  justifyContent="center" alignItems="center">
-          <Image alt=" " resizeMode="contain" size="20" source={require('./assets/icon_audio.png')}></Image>
+          <Image  resizeMode="contain"  source={require('./assets/icon_audio.png')}></Image>
         </Box>
         <Box paddingLeft="0" paddingRight="5" style={{flex:1, flexDirection:"column", justifyContent:"space-evenly"}}  >
           <Text fontSize="sm">{fileName}</Text>
@@ -74,9 +76,7 @@ const StepsVerification = () => {
       <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
         {/* XQ MIER NO SE MUESTRA LA IMAGEN????? */}
         <Image
-          alt=" "
-          maxHeight="200px"
-          resizeMode="contain"
+          //source={{uri:path}}
           source={{uri:path}}
         />
       </Box>
