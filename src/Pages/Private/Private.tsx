@@ -8,6 +8,8 @@ import Help from './Help';
 import Onboarding from './Onboarding';
 import {AppContextProvider} from '../../Shared/AppContext/AppContex';
 import useMe from '../../Shared/Hooks/useMe';
+import MyEvidence from './MyEvidence';
+import MyEvidenceDetail from './MyEvidence/MyEvidenceDetail/MyEvidenceDetail';
 
 const Private = () => {
   const {profile} = useMe();
@@ -25,6 +27,8 @@ const Private = () => {
           <Route path="/profile" component={Profile} />
           <Route path="/help" component={Help} />
           <Route path="/onboarding" component={Onboarding} />
+          <Route path="/myEvidence" component={MyEvidence} />
+          <Route path="/myEvidenceDetail" component={MyEvidenceDetail} />
         </PrivateLayout>
       </AppContextProvider>
     </NativeRouter>
