@@ -1,9 +1,13 @@
 import React from 'react';
 import {View, Text, Heading, Box, Image} from 'native-base';
 import useMe from '../../../Shared/Hooks/useMe';
+import { useHistory } from 'react-router-native';
+import PrimaryButton from '../../../Shared/PrimaryButton';
 
 const Home = () => {
   const {user} = useMe();
+  const history = useHistory();
+  const handleStartButton = () => history.push("/stepsInfo");
 
   if (user) {
     return (
@@ -23,6 +27,7 @@ const Home = () => {
             source={require('./assets/bg.png')}
           />
         </Box>
+        <PrimaryButton label="Empezar" buttonProps={{onPress:handleStartButton}}></PrimaryButton>
       </View>
     );
   }
