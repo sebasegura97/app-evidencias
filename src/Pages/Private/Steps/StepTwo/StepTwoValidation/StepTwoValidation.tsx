@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Box, Heading, Image, Stack, Button, Row, Column, ScrollView} from 'native-base';
+import {View, Text, Box, Heading, Image, Stack, Button, Column, ScrollView, Row} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
@@ -26,21 +26,30 @@ const StepTwoValidation = () => {
   const generateChildren = () => {
     let array:any[] = [];
     model.images.forEach(element => {
-      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+      array.push(imageBox(element["fileCopyUri"],element["name"],element["fileCopyUri"]));
     });
     return array;
   }
 
-  const imageBox = (path:string, key:string) => {
+  const imageBox = (path:string, name:string,key:string) => {
     return (
-      <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
+      <Box alignItems="center" justifyContent="flex-start" key={key}  marginLeft="5px" marginRight="5px" position="relative" maxWidth="150px" maxHeight="230px">
         {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
-        <Image
-          alt=" "
-          maxHeight="200px"
-          resizeMode="contain"
-          source={{uri:path}}
-        />
+        
+          <Row>
+            <Image
+              alt=" "
+              maxHeight="200px"
+              resizeMode="contain"
+              source={require('../assets/icon_image.png')}
+              size="150px"
+              //source={{uri:path}}
+            />
+          </Row>
+          <Row>
+            <Text>{name}</Text>
+          </Row>
+     
       </Box>
     );
   }

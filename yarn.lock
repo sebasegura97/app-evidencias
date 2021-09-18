@@ -7261,6 +7261,11 @@
     "css-select" "^2.1.0"
     "css-tree" "^1.0.0-alpha.39"
 
+"react-native-table-component@^1.2.1":
+  "integrity" "sha512-sapwO0bONfQtpWg3GVMwP5D3lGEJlxPB3c7fb0soXBynvCa+SBktacVZ9OmYJnIbRJ3uW5pS4tzNc8GmE+UScw=="
+  "resolved" "https://registry.npmjs.org/react-native-table-component/-/react-native-table-component-1.2.1.tgz"
+  "version" "1.2.1"
+
 "react-native-vector-icons@>7.0.0", "react-native-vector-icons@8.1.0":
   "integrity" "sha512-sHIdBB6Y0dHaot2fMXgy5J/hhCn5YuyN7SKDNFgPzL8KA1oF2/v7mgYMavnK7LIIs2dJoGnDANKf61dsU+TZlg=="
   "resolved" "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-8.1.0.tgz"

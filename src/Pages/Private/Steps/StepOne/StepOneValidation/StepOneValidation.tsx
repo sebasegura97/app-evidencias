@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
+//@ts-ignore 1
+import MediaMeta from 'react-native-media-meta';
 
 
 
@@ -11,16 +13,32 @@ const StepOneValidation = () => {
   const history = useHistory();
   const handleGoBack = () => history.goBack();
   const location = useLocation();
-  
+  const [metaData, setMetaData] = useState(null);
   let model:EvidenceModel = location.state as EvidenceModel;
   
   const fileSplit:[string] = model.screenCapture["result"]["outputURL"].toString().split("/");
 
+  useEffect(() => {
+  // MediaMeta.get(model.screenCapture["result"]["outputURL"].toString())
+  // .then((metadata: any) => setMetaData(metadata))
+  // .catch((err: any) => console.error(err));
+  }, []);
+
   const handleContinueButton = () => {
+    
     history.push({
       pathname:"/stepTwo",
       state:model,
     });
+  }
+
+  const getImage = () => {
+    if(metaData != null){
+      
+      return <Image resizeMode="contain" alt = " " source={{ uri: 'data:image/png;base64,' + metaData["thumb"] }} />
+    } else {
+      return <Image size="150px" resizeMode="contain" alt = " " source={require('../assets/icon_video.png')} />
+    }
   }
   
   return (
@@ -30,7 +48,9 @@ const StepOneValidation = () => {
         Tus capturas de pantalla
       </Text>
       <Box height="20px" ></Box>
-      <Box height="350px" width="100%" backgroundColor="red" marginBottom="5px"></Box>
+      <Box width="100%" maxHeight="300px" marginBottom="15px" marginTop="30px" alignItems="center">
+        {getImage()}
+      </Box>
       <Box width="100%">
         <Text marginX="10px" fontSize="xs" textAlign="left">{fileSplit[fileSplit.length-1]}</Text>
       </Box>

@@ -23,21 +23,24 @@ const StepThreeValidation = () => {
   const generateChildren = () => {
     let array:any[] = [];
     model.videos.forEach(element => {
-      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+      array.push(imageBox(element["fileCopyUri"],element["name"],element["fileCopyUri"]));
     });
     return array;
   }
 
-  const imageBox = (path:string, key:string) => {
+  const imageBox = (path:string,name:string, key:string) => {
     return (
-      <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
+      <Box key={key} justifyContent="flex-start" alignItems="center" marginLeft="5px" marginRight="5px" position="relative" maxWidth="150px" minHeight="230px">
         {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
         <Image
           alt=" "
           maxHeight="200px"
           resizeMode="contain"
-          source={{uri:path}}
+          size="150px"
+          source={require('../assets/icon_video.png')}
+          //source={{uri:path}}
         />
+        <Text>{name}</Text>
       </Box>
     );
   }

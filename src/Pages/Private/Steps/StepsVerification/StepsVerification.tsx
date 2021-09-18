@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import {View, Text, Box, Heading, Stack ,Button, Row, Column, ScrollView} from 'native-base';
+import {View, Text, Box, Heading, Stack ,Button, Row, Column, ScrollView, Image} from 'native-base';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../Models/EvidenceModel';
-import { Image, Image as nativeImage } from 'react-native';
+
 
 
 
@@ -13,8 +13,9 @@ const StepsVerification = () => {
 
   const history = useHistory();
   const location = useLocation();
-
+  
   let model:EvidenceModel = location.state as EvidenceModel;
+  const fileSplit:[string] = model.screenCapture["result"]["outputURL"].toString().split("/");
 
   const handleGoBack = () => {
     history.replace("/stepsInfo");
@@ -37,7 +38,7 @@ const StepsVerification = () => {
   const generateVideoChildren = () => {
     let array:any[] = [];
     model.videos.forEach(element => {
-      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+      array.push(videoBox(element["fileCopyUri"],element["name"],element["fileCopyUri"]));
     });
     return array;
   }
@@ -45,7 +46,7 @@ const StepsVerification = () => {
   const generateImageChildren = () => {
     let array:any[] = [];
     model.images.forEach(element => {
-      array.push(imageBox(element["fileCopyUri"],element["fileCopyUri"]));
+      array.push(imageBox(element["fileCopyUri"],element["name"],element["fileCopyUri"]));
     });
     return array;
   }
@@ -62,7 +63,7 @@ const StepsVerification = () => {
     return (
       <Box key={key} marginTop="5px" marginBottom="5px" width="100%" backgroundColor="#010121" style={{flexDirection:"row", borderRadius:15}}>
         <Box style={{flex:0, borderRadius:15}} height="80px" width="100px"  justifyContent="center" alignItems="center">
-          <Image  resizeMode="contain"  source={require('./assets/icon_audio.png')}></Image>
+          <Image alt=" "  resizeMode="contain"  source={require('./assets/icon_audio.png')}></Image>
         </Box>
         <Box paddingLeft="0" paddingRight="5" style={{flex:1, flexDirection:"column", justifyContent:"space-evenly"}}  >
           <Text fontSize="sm">{fileName}</Text>
@@ -71,14 +72,28 @@ const StepsVerification = () => {
     );
   }
 
-  const imageBox = (path:string, key:string) => {
+  const imageBox = (path:string,name:string, key:string) => {
     return (
-      <Box key={key} backgroundColor="red" marginLeft="5px" marginRight="5px" position="relative" width="150px" maxWidth="150px" minHeight="230px">
-        {/* XQ MIER NO SE MUESTRA LA IMAGEN????? */}
+      <Box key={key} alignItems="center" marginTop="15px" marginBottom="15px" justifyContent="flex-start" marginLeft="10px" marginRight="10px" position="relative" maxWidth="150px" maxHeight="250">
         <Image
+        alt = " "
           //source={{uri:path}}
-          source={{uri:path}}
+          source={require('./assets/icon_image.png')}
         />
+        <Text marginTop="10px">{name}</Text>
+      </Box>
+    );
+  }
+
+  const videoBox = (path:string,name:string, key:string) => {
+    return (
+      <Box key={key} alignItems="center" marginTop="15px" marginBottom="15px" justifyContent="flex-start" marginLeft="10px" marginRight="10px" position="relative" maxWidth="150px" maxHeight="250">
+        <Image
+        alt = " "
+          //source={{uri:path}}
+          source={require('./assets/icon_video.png')}
+        />
+        <Text marginTop="10px">{name}</Text>
       </Box>
     );
   }
@@ -90,16 +105,19 @@ const StepsVerification = () => {
         Podrás confirmar o volver a cargar archivos
       </Text>
       <Text marginTop="10px" marginBottom="10px">Grabación de pantalla</Text>
-      <Box marginTop="10px" marginBottom="10px" height="350px" width="100%" backgroundColor="red"></Box>
+      <Image size="150px" resizeMode="contain" alt = " " source={require('./assets/icon_video.png')} />
+      <Box width="100%" marginBottom="15px" marginTop="10px" alignItems="center">
+        <Text marginX="10px" fontSize="xs" textAlign="left">{fileSplit[fileSplit.length-1]}</Text>
+      </Box>
       <Text marginTop="10px" marginBottom="10px">Fotos seleccionadas</Text>
       <ScrollView horizontal={true} children={generateImageChildren()}/>
       <Text marginTop="10px" marginBottom="10px">Videos seleccionados</Text>
       <ScrollView horizontal={true} children={generateVideoChildren()}/>
-      <Text marginTop="10px" marginBottom="10px">Audios seleccionados</Text>
+      <Text marginTop="15px" marginBottom="10px">Audios seleccionados</Text>
       <ScrollView width="100%" children={generateAudioChildren()}/>
       <Text marginTop="10px" marginBottom="10px">¿Está todo bien?</Text>
       <PrimaryButton label="Confirmar" buttonProps={{onPress:handleContinue}} />
-      <Button backgroundColor="transparent" onPress={handleGoBack}>
+      <Button marginBottom="10px" backgroundColor="transparent" onPress={handleGoBack}>
         <Text fontSize="sm">Volver a elegir</Text>
       </Button>
 
