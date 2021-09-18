@@ -1,8 +1,5 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
-
-import RecordScreen from 'react-native-record-screen';
-import { Alert } from 'react-native';
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
@@ -16,13 +13,15 @@ const StepTwoValidation = () => {
 
   let model:EvidenceModel = location.state as EvidenceModel;
 
-  console.log(model);
-
   const handleContinue = () => {
-    history.push({
-      pathname:"/stepThree",
-      state:model,
-    });
+    console.log(decodeURI(model.images[0]["uri"]));
+    console.log(decodeURI(model.images[0]["fileCopyUri"]));
+    
+    
+    // history.push({
+    //   pathname:"/stepThree",
+    //   state:model,
+    // });
   }
 
   const handleGoBack = () => history.goBack();
@@ -33,13 +32,14 @@ const StepTwoValidation = () => {
       <Text textAlign="center">
         Aquí deberás seleccionar fotos
       </Text>
-      <Box height="20px" ></Box>
-      <Box position="relative" width="180px">
+      <Box height="50px" ></Box>
+      <Box position="relative" minHeight="230px">
+        {/* XQ EFGYIQF NO SE MUESTRA LA IMAGEN????? */}
         <Image
+          alt=" "
+          maxHeight="200px"
           resizeMode="contain"
-          alt="background"
-          height={350}
-          source={(model.images[0].uri.toString())}
+          source={{uri:(model.images[0]["fileCopyUri"]).toString()}}
         />
       </Box>
       <Box height="30px"></Box>

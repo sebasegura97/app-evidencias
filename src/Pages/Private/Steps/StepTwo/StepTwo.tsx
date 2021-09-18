@@ -43,8 +43,9 @@ const StepTwo = () => {
   async function handleSelectImage() {
     
     try {
-      const results = await DocumentPicker.pickMultiple({
+      const results = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
+        allowMultiSelection:true,
       })
       setResponse(results);
       
