@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Box, Heading, Image, Stack, Button, Row, Column} from 'native-base';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
-import RecordScreen from 'react-native-record-screen';
 import { Alert } from 'react-native';
 import { useHistory } from 'react-router-native';
 import EvidenceModel from '../../../../Models/EvidenceModel';
