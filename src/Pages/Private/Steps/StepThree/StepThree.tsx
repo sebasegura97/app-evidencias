@@ -29,7 +29,7 @@ const StepThree = () => {
           state:model,
         });
       }
-    }
+    },[response]
   );
 
   async function handleSelectVideo() {
@@ -45,7 +45,7 @@ const StepThree = () => {
       // } else {
       //   Alert.alert(err);     
       // }
-      Alert.alert("ERROR");     
+        
       setResponse(null);
     }
   }

@@ -25,7 +25,7 @@ const StepFour = () => {
         });
       }
     },
-    []
+    [response]
   );
 
   const handleSkipStep = () => {
@@ -48,7 +48,8 @@ const StepFour = () => {
       // } else {
       //   Alert.alert("Error");      
       // }
-      Alert.alert("Error");      
+      //Alert.alert("Error");      
+      setResponse(null);
     }
   }
 

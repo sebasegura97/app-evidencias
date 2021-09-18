@@ -60,7 +60,7 @@ const StepOne = () => {
     }
     
     async function handleStop(){
-        //hideFloatingBubble();
+        hideFloatingBubble();
         const res = await RecordScreen.stopRecording().catch((error:any) => Alert.alert(error));
         Alert.alert("Grabacion guardada en " + "+res.result.outputURL")
         if (res){

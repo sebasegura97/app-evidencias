@@ -23,14 +23,13 @@ const StepTwo = () => {
   useEffect(
     ()=>{
       if (response!=null){
-      
         model.images = response;
         history.push({
           pathname:"/stepTwoValidation",
           state:model,
         });
       }
-    }
+    }, [response]
     );
 
   const handleSkipStep = () => {
@@ -56,8 +55,8 @@ const StepTwo = () => {
       //   Alert.alert(err);      
       // }
       
-      Alert.alert("ERROR");      
-      setResponse([]);
+      //Alert.alert("ERROR");      
+      setResponse(null);
     }
   }
 
