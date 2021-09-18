@@ -8,6 +8,7 @@ import LinkButton from '../../../Shared/LinkButton';
 import {useState} from 'react';
 import { boxShadow } from 'styled-system';
 import AlternativeButton from '../../../Shared/AlternativeButton';
+import { useHistory } from 'react-router-native';
 
 type FormData = {
   email: string;
@@ -25,6 +26,21 @@ const Profile = () => {
       console.error(error);
     }
   };
+
+  const history = useHistory();
+
+const handleEditButton = () => {
+  history.push({
+    pathname:"/onboarding/step1",
+  });
+}
+
+const handleMyEvidenceButton = () => {
+  history.push({
+    pathname:"/myEvidence",
+  });
+}
+
 
   const {
     control,
@@ -53,7 +69,8 @@ const Profile = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              rightIcon={<Image alt="" source={require('./assets/edit_icon.png')} />}
+              disabled = {true}
+              
             />
           )}
           name="email"
@@ -99,19 +116,24 @@ const Profile = () => {
               </Row>
               <Text marginLeft="1.5%" fontSize="lg" textAlign="left">Tu Evidencia</Text>
               <Box marginLeft="-5%">
-                <AlternativeButton label="Ver mi evidencia" buttonProps={{onPress:()=>{}}} />
+                <AlternativeButton label="Ver mi evidencia" buttonProps={{onPress:handleMyEvidenceButton}} />
               </Box>
             </Box>
           </Box>
           <Box position="absolute" top="-40px" height="90px" width="90px" borderRadius="50px" border="5px #68E1FD" backgroundColor="red"></Box>
+          <Box onTouchStart={handleEditButton} position="absolute" right="20px" top="20px">
+            <Image alt=" " source={require('./assets/edit_icon.png')} size="5" ></Image>
+          </Box>
+          
         </Stack>
       </Box>
-      <Box marginY="15px">
-        {/* <LinkButton
-          label="Cerrar sesión"
-          loading={loading}
-          onPress={handleSignout}
-        /> */}
+      <Box alignItems="center">
+        <Box width="130px" onTouchStart={handleSignout}>
+          <LinkButton
+            label="Cerrar sesión"
+            loading={loading}
+          />
+        </Box>
       </Box>
     </View>
   );
