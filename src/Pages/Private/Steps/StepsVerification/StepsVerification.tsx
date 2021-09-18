@@ -3,6 +3,7 @@ import {View, Text, Box, Heading, Stack ,Button, Row, Column, ScrollView, Image}
 import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../Models/EvidenceModel';
+import { utils } from '@react-native-firebase/app';
 
 
 
@@ -27,13 +28,6 @@ const StepsVerification = () => {
       state:model,
     });
   }
-
-  useEffect(
-    ()=>{
-      model != null ? console.log(model) : console.log("Null model");
-    },
-    []
-  );
 
   const generateVideoChildren = () => {
     let array:any[] = [];
@@ -73,12 +67,16 @@ const StepsVerification = () => {
   }
 
   const imageBox = (path:string,name:string, key:string) => {
+    const fileSplit:string[] = path.split("/");
+    const fileName:string = fileSplit[fileSplit.length-2]+"/"+fileSplit[fileSplit.length-1];
+    console.log("file://"+ utils.FilePath.CACHES_DIRECTORY+"/"+fileName);
     return (
       <Box key={key} alignItems="center" marginTop="15px" marginBottom="15px" justifyContent="flex-start" marginLeft="10px" marginRight="10px" position="relative" maxWidth="150px" maxHeight="250">
         <Image
-        alt = " "
-          //source={{uri:path}}
-          source={require('./assets/icon_image.png')}
+        alt = "Couldn't find file "
+          source={{uri:"file://"+ utils.FilePath.CACHES_DIRECTORY+"/"+fileName}}
+          size="150px"
+          //source={require('./assets/icon_image.png')}
         />
         <Text fontSize="xs" marginTop="10px">{name}</Text>
       </Box>

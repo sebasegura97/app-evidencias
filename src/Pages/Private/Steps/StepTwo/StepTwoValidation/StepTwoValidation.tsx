@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
 import { anyTypeAnnotation } from '@babel/types';
+import { utils } from '@react-native-firebase/app';
 
 
 
@@ -32,6 +33,8 @@ const StepTwoValidation = () => {
   }
 
   const imageBox = (path:string, name:string,key:string) => {
+    const fileSplit:string[] = path.split("/");
+    const fileName:string = fileSplit[fileSplit.length-2]+"/"+fileSplit[fileSplit.length-1];
     return (
       <Box alignItems="center" justifyContent="flex-start" key={key}  marginLeft="5px" marginRight="5px" position="relative" maxWidth="150px" maxHeight="230px">
           <Row>
@@ -39,9 +42,9 @@ const StepTwoValidation = () => {
               alt=" "
               maxHeight="200px"
               resizeMode="contain"
-              source={require('../assets/icon_image.png')}
+              //source={require('../assets/icon_image.png')}
               size="150px"
-              //source={{uri:path}}
+              source={{uri:"file://"+ utils.FilePath.CACHES_DIRECTORY+"/"+fileName}}
             />
           </Row>
           <Row>

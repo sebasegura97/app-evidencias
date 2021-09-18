@@ -46,6 +46,7 @@ const StepTwo = () => {
       const results = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
         allowMultiSelection:true,
+        copyTo:"cachesDirectory",
       })
       setResponse(results);
       

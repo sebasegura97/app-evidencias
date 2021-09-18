@@ -51,7 +51,7 @@ const StepOneValidation = () => {
       <Box width="100%" maxHeight="300px" marginBottom="15px" marginTop="30px" alignItems="center">
         {getImage()}
       </Box>
-      <Box width="100%">
+      <Box alignItems="center" width="100%">
         <Text marginX="10px" fontSize="xs" textAlign="left">{fileSplit[fileSplit.length-1]}</Text>
       </Box>
       <Box height="30px"></Box>
