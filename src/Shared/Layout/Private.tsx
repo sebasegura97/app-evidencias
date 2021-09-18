@@ -29,9 +29,11 @@ const PrivateLayout: React.FC = ({children}) => {
   return (
     <NativeBaseProvider config={nativeBaseConfig} theme={theme}>
       <Box safeAreaTop flex={1}>
-        {showHeader && <Header title="Titulo" />}
+        {/* {showHeader && <Header title="Titulo" />} */}
         <GradientBackground>
-          <ScrollView>{children}</ScrollView>
+          <Box paddingTop={4}>
+            <ScrollView>{children}</ScrollView>
+          </Box>
         </GradientBackground>
         {showNavigation && <BottomNavigation />}
       </Box>

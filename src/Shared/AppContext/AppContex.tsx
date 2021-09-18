@@ -11,7 +11,7 @@ export const AppContext = createContext<AppContextType>({
 });
 
 export const AppContextProvider: FC = ({children}) => {
-  const [showHeader, setShowHeader] = useState(true);
+  const [showHeader, setShowHeader] = useState(false);
   const [showNavigation, setShowNavigation] = useState(true);
 
   const setHeader = (visible: boolean) => {
