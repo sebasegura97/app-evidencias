@@ -29,6 +29,7 @@ type FormData = {
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
+
   const {user} = useMe();
 
   const handleSignout = async () => {
