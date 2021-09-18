@@ -1,6 +1,7 @@
 import React, {FC, useRef, useState} from 'react';
 import {Animated, Easing} from 'react-native';
 import {Box, Pressable, ScrollView, Text} from 'native-base';
+import colors from '../../Constants/colors';
 
 export interface CollapsableProps {
   title: string;
@@ -36,16 +37,18 @@ const Collapsable: FC<CollapsableProps> = ({title, body}) => {
   }, [expanded]);
 
   return (
-    <Box>
+    <Box
+      backgroundColor={colors.bgPrimaryDark}
+      paddingX={6}
+      paddingY={2}
+      borderRadius={8}>
       <Pressable onPress={toggleExpansion}>
         <Text fontSize="lg">{title}</Text>
       </Pressable>
       <Animated.View style={{height: animationHeight}}>
-        <ScrollView>
-          <Text fontSize="sm" ref={textRef}>
-            {body}
-          </Text>
-        </ScrollView>
+        <Text fontSize="sm" ref={textRef}>
+          {body}
+        </Text>
       </Animated.View>
     </Box>
   );
