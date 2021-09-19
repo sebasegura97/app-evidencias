@@ -22,7 +22,7 @@ const StepFour = () => {
         state: model,
       });
     }
-  }, []);
+  }, [response]);
 
   const handleSkipStep = () => {
     model.audios = [];
@@ -46,6 +46,8 @@ const StepFour = () => {
       //   Alert.alert("Error");
       // }
       Alert.alert('Error');
+      //Alert.alert("Error");
+      setResponse(null);
     }
   }
 
