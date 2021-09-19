@@ -1,62 +1,53 @@
-import React from 'react';
-import {Text, Box, Heading, Image, Stack, Button, View} from 'native-base';
+import React, {useEffect} from 'react';
+
+import {useHistory, useLocation} from 'react-router-native';
+import {Text, Box, Heading, Image, Button, View} from 'native-base';
+import DocumentPicker from 'react-native-document-picker';
+
 import PrimaryButton from '../../../../Shared/PrimaryButton';
-import { useHistory, useLocation } from 'react-router-native';
-import DocumentPicker from 'react-native-document-picker'
-import { Alert } from 'react-native';
-import { useEffect } from 'react';
 import EvidenceModel from '../../../../Models/EvidenceModel';
+import {Alert} from 'react-native';
+import useUploadFile from '../../../../Shared/Hooks/useUploadFile';
 
-
-
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 const StepTwo = () => {
-  
   const history = useHistory();
   const [response, setResponse] = React.useState<any>(null);
   const location = useLocation();
-  
-  let model:EvidenceModel = location.state as EvidenceModel;
+  const {uploadSingleFile, loadingStatus, loading} = useUploadFile();
 
-  
-  
-  useEffect(
-    ()=>{
-      if (response!=null){
-      
-        model.images = response;
-        history.push({
-          pathname:"/stepTwoValidation",
-          state:model,
-        });
-      }
+  let model: EvidenceModel = location.state as EvidenceModel;
+
+  useEffect(() => {
+    if (response != null) {
+      history.push({
+        pathname: '/stepTwoValidation',
+        state: model,
+      });
     }
-    );
+  });
 
   const handleSkipStep = () => {
     model.images = [];
     history.push({
-      pathname:"/stepThree",
-      state:model,
+      pathname: '/stepThree',
+      state: model,
     });
-  }
+  };
 
   async function handleSelectImage() {
-    
     try {
-      const results = await DocumentPicker.pickMultiple({
+      DocumentPicker.pickSingle({
         type: [DocumentPicker.types.images],
-      })
-      setResponse(results);
-      
+        copyTo: 'cachesDirectory',
+        mode: 'import',
+      }).then(response => {
+        uploadSingleFile(response);
+        // uploadMultipleFiles(response);
+      });
     } catch (err) {
-      // if (DocumentPicker.isCancel(err)) {
-      //   // User cancelled the picker, exit any dialogs or menus and move on
-      // } else {
-      //   Alert.alert(err);      
-      // }
-      
-      Alert.alert("ERROR");      
+      Alert.alert('ERROR');
       setResponse([]);
     }
   }
@@ -64,9 +55,7 @@ const StepTwo = () => {
   return (
     <View alignItems="center">
       <Heading>Paso 2</Heading>
-      <Text textAlign="center">
-        Aquí deberás seleccionar fotos
-      </Text>
+      <Text textAlign="center">Aquí deberás seleccionar fotos</Text>
       <Box position="relative" width="180px">
         <Image
           resizeMode="contain"
@@ -75,13 +64,19 @@ const StepTwo = () => {
           source={require('./assets/stepTwo.png')}
         />
       </Box>
-      <PrimaryButton label="Ver galeria" buttonProps={{onPress:handleSelectImage}} />
-      <Button backgroundColor="transparent" onPress={handleSkipStep}>
+      <PrimaryButton
+        label="Ver galeria"
+        buttonProps={{onPress: handleSelectImage}}
+      />
+      <Button
+        backgroundColor="transparent"
+        onPress={handleSkipStep}
+        isLoading={loading}>
         <Text fontSize="sm">Saltar paso</Text>
       </Button>
+      {loading && <Text fontSize="sm"> {loadingStatus}</Text>}
     </View>
   );
 };
 
 export default StepTwo;
-

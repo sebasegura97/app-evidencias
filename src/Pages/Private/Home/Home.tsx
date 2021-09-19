@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, Text, Heading, Box, Image} from 'native-base';
+import {View, Text, Heading, Box, Image, Center} from 'native-base';
 import useMe from '../../../Shared/Hooks/useMe';
-import { useHistory } from 'react-router-native';
+import {useHistory} from 'react-router-native';
 import PrimaryButton from '../../../Shared/PrimaryButton';
 
 const Home = () => {
   const {user} = useMe();
   const history = useHistory();
-  const handleStartButton = () => history.push("/stepsInfo");
+  const handleStartButton = () => history.push('/stepsInfo');
 
   if (user) {
     return (
@@ -24,10 +24,17 @@ const Home = () => {
             resizeMode="contain"
             alt="background"
             height={380}
+            marginRight="auto"
+            marginLeft="auto"
+            marginTop={4}
+            marginBottom={4}
             source={require('./assets/bg.png')}
           />
         </Box>
-        <PrimaryButton label="Empezar" buttonProps={{onPress:handleStartButton}}></PrimaryButton>
+        <PrimaryButton
+          label="Empezar"
+          buttonProps={{onPress: handleStartButton}}
+        />
       </View>
     );
   }
