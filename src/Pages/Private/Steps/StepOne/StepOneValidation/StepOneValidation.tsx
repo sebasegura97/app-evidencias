@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -13,15 +13,26 @@ import {
 import {useHistory, useLocation} from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
+//@ts-ignore 1
+import MediaMeta from 'react-native-media-meta';
 
 const StepOneValidation = () => {
   const history = useHistory();
   const handleGoBack = () => history.goBack();
   const location = useLocation();
 
+  const [metaData, setMetaData] = useState(null);
   let model: EvidenceModel = location.state as EvidenceModel;
 
-  console.log(model);
+  const fileSplit: [string] = model?.screenCapture?.result?.outputURL
+    .toString()
+    .split('/');
+
+  useEffect(() => {
+    // MediaMeta.get(model.screenCapture["result"]["outputURL"].toString())
+    // .then((metadata: any) => setMetaData(metadata))
+    // .catch((err: any) => console.error(err));
+  }, []);
 
   const handleContinueButton = () => {
     history.push({
@@ -30,15 +41,43 @@ const StepOneValidation = () => {
     });
   };
 
+  const getImage = () => {
+    if (metaData != null) {
+      return (
+        <Image
+          resizeMode="contain"
+          alt=" "
+          source={{uri: 'data:image/png;base64,' + metaData.thumb}}
+        />
+      );
+    } else {
+      return (
+        <Image
+          size="150px"
+          resizeMode="contain"
+          alt=" "
+          source={require('../assets/icon_video.png')}
+        />
+      );
+    }
+  };
+
   return (
     <View alignItems="center">
       <Heading>Paso 1</Heading>
       <Text textAlign="center">Tus capturas de pantalla</Text>
       <Box height="20px" />
-      <Box height="350px" width="100%" backgroundColor="red" />
-      <Box width="100%">
+      <Box
+        width="100%"
+        maxHeight="300px"
+        marginBottom="15px"
+        marginTop="30px"
+        alignItems="center">
+        {getImage()}
+      </Box>
+      <Box alignItems="center" width="100%">
         <Text marginX="10px" fontSize="xs" textAlign="left">
-          {model.screenCapture?.result?.outputUrl}
+          {fileSplit[fileSplit.length - 1]}
         </Text>
       </Box>
       <Box height="30px" />

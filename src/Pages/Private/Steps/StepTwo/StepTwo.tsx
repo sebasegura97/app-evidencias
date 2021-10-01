@@ -38,17 +38,21 @@ const StepTwo = () => {
 
   async function handleSelectImage() {
     try {
-      DocumentPicker.pickSingle({
+      const results = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
+        allowMultiSelection: true,
         copyTo: 'cachesDirectory',
-        mode: 'import',
-      }).then(response => {
-        uploadSingleFile(response);
-        // uploadMultipleFiles(response);
       });
+      setResponse(results);
     } catch (err) {
-      Alert.alert('ERROR');
-      setResponse([]);
+      // if (DocumentPicker.isCancel(err)) {
+      //   // User cancelled the picker, exit any dialogs or menus and move on
+      // } else {
+      //   Alert.alert(err);
+      // }
+
+      //Alert.alert("ERROR");
+      setResponse(null);
     }
   }
 

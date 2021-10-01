@@ -25,6 +25,7 @@ type FormData = {
   streetNumber: string;
   flat: string;
   email: string;
+  photo: string;
 };
 
 const Profile = () => {
@@ -43,7 +44,7 @@ const Profile = () => {
 
   const history = useHistory();
 
-  const handleEditButton = () => {
+  const handleEditButton = () => {    
     history.push({
       pathname: '/onboarding/step1',
     });
@@ -56,6 +57,7 @@ const Profile = () => {
   };
 
   const {control, setValue} = useForm<FormData>();
+  const [gender,setGender] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,12 +79,26 @@ const Profile = () => {
         setValue('department', result?.data()?.department);
         setValue('streetNumber', result?.data()?.streetNumber);
         setValue('birthDate', result?.data()?.birthDate);
+        setValue('photo', result?.data()?.photo);
+        setGender(result?.data()?.gender.toString());
       }
     };
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const getUserImage = () => {
+    if(user?.photoURL==null){
+      if(gender == "F"){
+        return <Image resizeMode="contain" alt='' source={require('./assets/defaultFemale.png')}  />
+      } else {
+        return <Image resizeMode="contain" alt='' source={require('./assets/defaultFemale.png')}  />
+      }
+    } else {
+      return <Image resizeMode="contain" alt='' source={{uri:user.photoURL}}  />
+    }
+  }
 
   const inputField = (label: string, name: keyof FormData) => {
     return (
@@ -162,15 +178,9 @@ const Profile = () => {
               </Box>
             </Box>
           </Box>
-          <Box
-            position="absolute"
-            top="-40px"
-            height="90px"
-            width="90px"
-            borderRadius="50px"
-            border="5px #68E1FD"
-            backgroundColor="red"
-          />
+          <Box alignItems="center" justifyContent="center" position="absolute" top="-40px" height="90px" width="90px" borderRadius="50px" border="5px #68E1FD"> 
+          {getUserImage()}
+          </Box>
           <Box
             onTouchStart={handleEditButton}
             position="absolute"
