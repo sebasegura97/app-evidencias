@@ -6,10 +6,7 @@ import {
   Box,
   Heading,
   Image,
-  Stack,
   Button,
-  Row,
-  Column,
   ScrollView,
 } from 'native-base';
 import {useHistory, useLocation} from 'react-router-native';
@@ -178,7 +175,7 @@ const StepsVerification = () => {
         marginTop="10px"
         alignItems="center">
         <Text marginX="10px" fontSize="xs" textAlign="left">
-          {fileSplit[fileSplit.length - 1]}
+          {/* {fileSplit[fileSplit.length - 1]} */}
         </Text>
       </Box>
       <Text marginTop="10px" marginBottom="10px">

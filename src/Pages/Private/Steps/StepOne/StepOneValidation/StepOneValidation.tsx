@@ -13,28 +13,22 @@ import {
 import {useHistory, useLocation} from 'react-router-native';
 import PrimaryButton from '../../../../../Shared/PrimaryButton';
 import EvidenceModel from '../../../../../Models/EvidenceModel';
-//@ts-ignore 1
-import MediaMeta from 'react-native-media-meta';
+import useUploadFile from '../../../../../Shared/Hooks/useUploadFile';
 
 const StepOneValidation = () => {
   const history = useHistory();
   const handleGoBack = () => history.goBack();
   const location = useLocation();
 
-  const [metaData, setMetaData] = useState(null);
+  const [metaData] = useState(null);
   let model: EvidenceModel = location.state as EvidenceModel;
 
   const fileSplit: [string] = model?.screenCapture?.result?.outputURL
     .toString()
     .split('/');
 
-  useEffect(() => {
-    // MediaMeta.get(model.screenCapture["result"]["outputURL"].toString())
-    // .then((metadata: any) => setMetaData(metadata))
-    // .catch((err: any) => console.error(err));
-  }, []);
-
-  const handleContinueButton = () => {
+  const handleContinueButton = async () => {
+    // await uploadSingleFile(model.screenCapture?.result)
     history.push({
       pathname: '/stepTwo',
       state: model,
